@@ -4,10 +4,9 @@
 <head>
     <title>Asignar Cita</title>
     <link rel="stylesheet" type="text/css" href="Vista/css/estilos.css">
-    <script type="text/javascript" src="Vista/jquery/jquery.js"></script>
+    <script type="text/javascript" src="Vista/jquery/jquery-ui--1.14.1"></script>
     <script type="text/javascript" src="Vista/js/script.js"></script>
 </head>
-
 <body>
     <div id="contenedor">
         <div id="encabezado">
@@ -86,59 +85,58 @@
                     </tr>
                 </table>
             </form>
+            <div id="frmPaciente" title="Agregar Nuevo Paciente">
+                <form id="agregarPaciente">
+                    <table>
+                        <tr>
+                            <td>Documento</td>
+
+                            <td><input type="text" name="PacDocumento"
+
+                                    id="PacDocumento"></td>
+                        </tr>
+                        <tr>
+
+                            <td>Nombres</td>
+
+                            <td><input type="text" name="PacNombres"
+
+                                    id="PacNombres"></td>
+                        </tr>
+                        <tr>
+
+                            <td>Apellidos</td>
+
+                            <td><input type="text" name="PacApellidos"
+
+                                    id="PacApellidos"></td>
+                        </tr>
+                        <tr>
+
+                            <td>Fecha de Nacimiento</td>
+
+                            <td><input type="text" name="PacNacimiento"
+
+                                    id="PacNacimiento"></td>
+                        </tr>
+                        <tr>
+
+                            <td>Sexo</td>
+
+                            <td>
+
+                                <select id="pacSexo" name="PacSexo">
+                                    <option value="-1" selected="selected">--Selecione el sexo ---</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
+
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
         </div>
     </div>
-    <div id="frmPaciente" title="Agregar Nuevo Paciente">
-        <form id="agregarPaciente">
-            <table>
-                <tr>
-                    <td>Documento</td>
-
-                    <td><input type="text" name="PacDocumento"
-
-                            id="PacDocumento"></td>
-                </tr>
-                <tr>
-
-                    <td>Nombres</td>
-
-                    <td><input type="text" name="PacNombres"
-
-                            id="PacNombres"></td>
-                </tr>
-                <tr>
-
-                    <td>Apellidos</td>
-
-                    <td><input type="text" name="PacApellidos"
-
-                            id="PacApellidos"></td>
-                </tr>
-                <tr>
-
-                    <td>Fecha de Nacimiento</td>
-
-                    <td><input type="text" name="PacNacimiento"
-
-                            id="PacNacimiento"></td>
-                </tr>
-                <tr>
-
-                    <td>Sexo</td>
-
-                    <td>
-
-                        <select id="pacSexo" name="PacSexo">
-                            <option value="-1" selected="selected">--Selecione el sexo ---</option>
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
-
-                        </select>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
 </body>
-
 </html>
