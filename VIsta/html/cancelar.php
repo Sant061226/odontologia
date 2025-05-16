@@ -4,8 +4,12 @@
 <head>
     <title>Cancelar Cita</title>
     <link rel="stylesheet" type="text/css" href="Vista/css/estilos.css">
+    <link href="Vista/jquery/jquery-ui-1.14.1/jquery-ui.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="Vista/jquery/jquery.js"></script>
-    <script type="text/javascript" src="Vista/js/script.js"></script>
+    <script src="Vista/jquery/jquery-ui-1.14.1/jquery-ui.js" type="text/javascript"></script>
+    <script src="Vista/js/script.js" type="text/javascript"></script>
+    <script>
+    </script>
 </head>
 
 <body>
@@ -32,8 +36,8 @@
                                 id="cancelarDocumento"></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><input type="submit"
-                                name="cancelarConsultar" value="Consultar" id="cancelarConsultar"></td>
+                        <td colspan="2"><input type="button" value="Consultar"
+                                onclick="cancelarCita()"></td>
                     </tr>
                     <tr>
                         <td colspan="2">

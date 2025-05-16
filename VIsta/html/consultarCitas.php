@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
 
 <head>
     <meta charset="UTF-8">
     <title></title>
+
 </head>
 
 <body>
@@ -20,11 +16,6 @@ and open the template in the editor.
                 <th>Número</th>
                 <th>Fecha</th>
                 <th>Hora</th>
-                <th>Paciente</th>
-                <th>Medico</th>
-                <th>Consultorio</th>
-                <th>Estado</th>
-                <th>Observaciones</th>
             </tr>
             <?php
             while ($fila = $result->fetch_object()) {
@@ -32,12 +23,9 @@ and open the template in the editor.
                 <tr>
                     <td><?php echo $fila->CitNumero; ?></td>
                     <td><?php echo $fila->CitFecha; ?></td>
-                    <td><?php echo $fila->CitHora; ?></td>
-                    <td><?php echo $fila->CitPaciente; ?></td>
-                    <td><?php echo $fila->CitMedico; ?></td>
-                    <td><?php echo $fila->CitConsultorio; ?></td>
-                    <td><?php echo $fila->CitEstado; ?></td>
-                    <td><?php echo $fila->CitObservaciones; ?></td>
+                    <td><?php echo $fila->CitHora; ?></td></td>
+                    <td><a href="index.php?accion=verCita&numero=<?php echo $fila->CitNumero;
+                                                                    ?>">Ver</a></td>
                 </tr>
             <?php
             }
