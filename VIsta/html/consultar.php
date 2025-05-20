@@ -22,6 +22,8 @@
             <li><a href="index.php?accion=asignar">Asignar</a> </li>
             <li class="activa"><a href="index.php?accion=consultar">Consultar Cita</a></li>
             <li><a href="index.php?accion=cancelar">Cancelar Cita</a> </li>
+            <li><a href="index.php?accion=tratamientos">Tratamientos</a> </li>
+
         </ul>
         <div id="contenido">
             <h2>Consultar Cita</h2>

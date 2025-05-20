@@ -12,6 +12,8 @@ if (isset($_GET["accion"])) {
         $controlador->verPagina('Vista/html/consultar.php');
     } elseif ($_GET["accion"] == "cancelar") {
         $controlador->verPagina('Vista/html/cancelar.php');
+    } elseif ($_GET["accion"] == "tratamientos") {
+        $controlador->verPagina('Vista/html/tratamientos.php');
     } elseif ($_GET["accion"] == "guardarCita") {
         $controlador->agregarCita(
             $_POST["asignarDocumento"],
@@ -41,7 +43,7 @@ if (isset($_GET["accion"])) {
         $controlador->verCita($_GET["numero"]);
     } elseif ($_GET["accion"] == "confirmarCancelar") {
         $controlador->confirmarCancelarCita($_GET["numero"]);
-    }
+    } 
 } else {
     $controlador->verPagina('Vista/html/inicio.php');
 }

@@ -23,7 +23,13 @@ function consultarPaciente() {
   var url =
     "index.php?accion=ConsultarPaciente&documento=" +
     $("#asignarDocumento").val();
-  $("#paciente").load(url, function () {});
+  $("#paciente").load(url, function (response) {
+    if (response.indexOf("<!--EXISTE-->") !== -1){
+      $("#asignarEnviar").prop("disabled", false);
+    } else {
+      $("#asignarEnviar").prop("disabled", true);   
+    }
+  });
 }
 function mostrarFormulario() {
   documento = "" + $("#asignarDocumento").val();
@@ -58,6 +64,17 @@ function seleccionarHora() {
     alert("Debe seleccionar una fecha");
   } else if ($("#consultorio").val() == -1) {
     alert("Debe seleccionar un consultorio");
+  }
+}
+function enviar() {
+  if ($("#medico").val() == -1) {
+    alert("Debe seleccionar un médico");
+  } else if ($("#fecha").val() == "") {
+    alert("Debe seleccionar una fecha");
+  } else if ($("#consultorio").val() == -1) {
+    alert("Debe seleccionar un consultorio");
+  } else if ($("#hora").val() == -1) {
+    alert("Debe seleccionar una hora");
   }
 }
 function consultarCita() {

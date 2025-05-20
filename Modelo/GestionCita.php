@@ -5,11 +5,11 @@ class GestorCita
     {
         $conexion = new Conexion();
         $conexion->abrir();
-        $fecha = $cita->obtenerFecha();
-        $hora = $cita->obtenerHora();
         $paciente = $cita->obtenerPaciente();
         $medico = $cita->obtenerMedico();
+        $fecha = $cita->obtenerFecha();
         $consultorio = $cita->obtenerConsultorio();
+        $hora = $cita->obtenerHora();
         $estado = $cita->obtenerEstado();
         $observaciones = $cita->obtenerObservaciones();
         $sql = "INSERT INTO Citas VALUES ( null,'$fecha','$hora',

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Asignar Cita</title>
     <link rel="stylesheet" type="text/css" href="Vista/css/estilos.css">
@@ -22,6 +21,7 @@
             <li class="activa"><a href="index.php?accion=asignar">Asignar</a> </li>
             <li><a href="index.php?accion=consultar">Consultar Cita</a> </li>
             <li><a href="index.php?accion=cancelar">Cancelar Cita</a> </li>
+            <li><a href="index.php?accion=tratamientos">Tratamientos</a> </li>
         </ul>
         <div id="contenido">
             <h2>Asignar cita</h2>
@@ -35,7 +35,8 @@
                     </tr>
                     <tr>
                         <td colspan="2"><input type="button" value="Consultar" name="asignarConsultar"
-                                id="asignarConsultar" onclick="consultarPaciente()"></td>
+                                id="asignarConsultar" onclick="consultarPaciente()" required>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -102,7 +103,7 @@
                     <tr>
                         <td colspan="2">
                             <input type="submit" name="asignarEnviar" value="Enviar"
-                                id="asignarEnviar">
+                                id="asignarEnviar" onmousedown="enviar()" disabled>
                         </td>
                     </tr>
                 </table>
@@ -137,7 +138,7 @@
 
                             <td>Fecha de Nacimiento</td>
 
-                            <td><input type="text" name="PacNacimiento"
+                            <td><input type="date" name="PacNacimiento"
 
                                     id="PacNacimiento"></td>
                         </tr>
