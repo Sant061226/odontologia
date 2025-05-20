@@ -4,11 +4,29 @@ function insertarPaciente() {
   $("#paciente").load(url);
   $("#frmPaciente").dialog("close");
 }
+function insertarPaciente() {
+  queryString = $("#agregarTratamiento").serialize();
+  url = "index.php?accion=ingresarTratamiento&" + queryString;
+  $("#paciente").load(url);
+  $("#frmTratamiento").dialog("close");
+}
 function cancelar() {
   $(this).dialog("close");
 }
 $(document).ready(function () {
   $("#frmPaciente").dialog({
+    autoOpen: false,
+    height: 310,
+    width: 400,
+    modal: true,
+    buttons: {
+      Insertar: insertarPaciente,
+      Cancelar: cancelar,
+    },
+  });
+});
+$(document).ready(function () {
+  $("#frmTratamiento").dialog({
     autoOpen: false,
     height: 310,
     width: 400,
@@ -31,16 +49,33 @@ function consultarPaciente() {
     }
   });
 }
+function consultarTratamiento() {
+  var url =
+    "index.php?accion=ConsultarTratamientos&documento=" +
+    $("#asignarDocumento").val();
+  $("#paciente").load(url);
+}
 function mostrarFormulario() {
   documento = "" + $("#asignarDocumento").val();
   $("#PacDocumento").attr("value", documento);
   $("#frmPaciente").dialog("open");
+}
+function mostrarFormularioTrat() {
+  documento = "" + $("#asignarDocumento").val();
+  $("#PacDocumento").attr("value", documento);
+  $("#frmTratamiento").dialog("open");
 }
 function insertarPaciente() {
   queryString = $("#agregarPaciente").serialize();
   url = "index.php?accion=ingresarPaciente&" + queryString;
   $("#paciente").load(url);
   $("#frmPaciente").dialog("close");
+}
+function insertarTrataiento() {
+  queryString = $("#agregarTratamiento").serialize();
+  url = "index.php?accion=ingresarPaciente&" + queryString;
+  $("#paciente").load(url);
+  $("#frmTratamiento").dialog("close");
 }
 function cancelar() {
   $(this).dialog("close");
@@ -80,6 +115,12 @@ function enviar() {
 function consultarCita() {
   url =
     "index.php?accion=consultarCita&consultarDocumento=" +
+    $("#consultarDocumento").val();
+  $("#paciente2").load(url);
+}
+function consultarTratamientodisponible() {
+  url =
+    "index.php?accion=ConsultarTratamientos&consultarDocumento=" +
     $("#consultarDocumento").val();
   $("#paciente2").load(url);
 }

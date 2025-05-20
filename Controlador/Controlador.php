@@ -22,6 +22,21 @@ class Controlador
         $result = $gestorCita->consultarCitaPorId($id);
         require_once 'Vista/html/confirmarCita.php';
     }
+    public function agregarTratamientos($doc, $fechasig, $descripcion, $fechaini, $fechafin, $observaciones)
+    {
+        $tratamiento = new Tratamientos(
+            $doc,
+            $fechasig,
+            $descripcion,
+            $fechaini,
+            $fechafin,
+            $observaciones
+        );
+        $tratamientos = new GestorTratamientos();
+        $id = $tratamientos->agregarTratamiento($tratamiento);
+        $result = $tratamientos->agregarTratamiento($doc);
+        require_once 'Vista/html/consultarTratamientos.php';
+    }
     public function consultarCitas($doc)
     {
         $gestorCita = new GestorCita();
@@ -39,6 +54,13 @@ class Controlador
         $gestorCita = new GestorCita();
         $result = $gestorCita->consultarPaciente($doc);
         require_once 'Vista/html/consultarPaciente.php';
+    }
+    public function consultarTratamiento($doc)
+    {
+        $tratamiento = new GestorTratamientos();
+        $result = $tratamiento->consultarTratamiento($doc);
+        $resultado = $tratamiento->consultarTratamientosPorDocumento($doc);
+        require_once 'Vista/html/consultarTratamientos.php';
     }
     public function agregarPaciente($doc, $nom, $ape, $fec, $sex)
     {
@@ -84,4 +106,3 @@ class Controlador
         }
     }
 }
-

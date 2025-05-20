@@ -38,4 +38,8 @@ class Conexion
     {
         return $this->citaId;
     }
+    public function obtenerTratamientoId()
+    {
+        return $this->TratamientoId;
+    }
 }

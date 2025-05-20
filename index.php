@@ -4,6 +4,8 @@ require_once 'Modelo/GestionCita.php';
 require_once 'Modelo/Citas.php';
 require_once 'Modelo/Paciente.php';
 require_once 'Modelo/Conexion.php';
+require_once 'Modelo/Tratamientos.php';
+require_once 'Modelo/GestionTratamientos.php';
 $controlador = new Controlador();
 if (isset($_GET["accion"])) {
     if ($_GET["accion"] == "asignar") {
@@ -37,13 +39,25 @@ if (isset($_GET["accion"])) {
             $_GET["PacNacimiento"],
             $_GET["PacSexo"]
         );
+    } elseif ($_GET["accion"] == "ingresarTratamiento") {
+        $controlador->agregarTratamientos(
+            $_GET["PacDocumento"],
+            $_GET["fechasig"],
+            $_GET["desc"],
+            $_GET["fechin"],
+            $_GET["fecfin"],
+            $_GET["obs"]
+
+        );
     } elseif ($_GET["accion"] == "consultarHora") {
         $controlador->consultarHorasDisponibles($_GET["medico"], $_GET["fecha"]);
     } elseif ($_GET["accion"] == "verCita") {
         $controlador->verCita($_GET["numero"]);
     } elseif ($_GET["accion"] == "confirmarCancelar") {
         $controlador->confirmarCancelarCita($_GET["numero"]);
-    } 
+    } elseif ($_GET["accion"] == "ConsultarTratamientos") {
+        $controlador->consultarTratamiento($_GET["documento"]);
+    }
 } else {
     $controlador->verPagina('Vista/html/inicio.php');
 }

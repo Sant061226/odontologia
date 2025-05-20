@@ -16,6 +16,7 @@
                 <th>Documento</th>
                 <th>Nombre Completo</th>
                 <th>Sexo</th>
+                <th>Fecha Nacimiento</th>
             </tr>
             <?php
             while ($fila = $result->fetch_object()) {
@@ -24,7 +25,7 @@
                     <td><?php echo $fila->PacIdentificacion; ?></td>
                     <td><?php echo $fila->PacNombres . " " . $fila->PacApellidos; ?></td>
                     <td><?php echo $fila->PacSexo; ?></td>
-                    <td>Ver</td>
+                    <td><?php echo $fila->PacFechaNacimiento; ?></td>
                 </tr>
             <?php
             }

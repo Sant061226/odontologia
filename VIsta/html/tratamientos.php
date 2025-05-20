@@ -26,27 +26,28 @@
 
         </ul>
         <div id="contenido">
-            <h2>Consultar Cita</h2>
-            <form action="index.php?accion=consultarCita" method="post" id="frmconsultar">
+            <h2>Consultar Tratamientos</h2>
+            <form id="frmasignar" action="index.php?accion=consultarTratamientos" method="post">
                 <table>
                     <tr>
-                        <td>Documento del Paciente</td>
-                        <td><input type="text" name="consultarDocumento"
-                                id="consultarDocumento"></td>
+                        <td>Documento del paciente</td>
+                        <td><input type="text" name="asignarDocumento" id="asignarDocumento" required></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><input type="button" name="consultarConsultar"
-                                value="Consultar" id="consultarConsultar" onclick="consultarCita()"></td>
+                        <td colspan="2"><input type="button" value="Consultar" name="asignarConsultar"
+                                id="asignarConsultar" onclick="consultarTratamiento()" required>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <div id="paciente2"></div>
+                            <div id="paciente"></div>
                         </td>
                     </tr>
-                </table>
-            </form>
+                    <tr>
+                    </table>
+                </form>
+            </div>
         </div>
-    </div>
 </body>
 
 </html>
