@@ -1,20 +1,26 @@
 <?php
 class Tratamientos
 {
+    private $numero;
     private $identificacion;
     private $fechasig;
     private $descripcion;
     private $fechaini;
     private $fechafin;
     private $observaciones;
-    public function __construct($ide, $fec, $des, $fIn, $fFin, $obs)
+    public function __construct($num, $ide, $fec, $des, $fIn, $fFin, $obs)
     {
+        $this->numero = $num;
         $this->identificacion = $ide;
         $this->fechasig = $fec;
         $this->descripcion = $des;
         $this->fechaini = $fIn;
         $this->fechafin = $fFin;
         $this->observaciones = $obs;
+    }
+    public function obtenerNumero()
+    {
+        return $this->numero;
     }
     public function obtenerIdentificacion()
     {

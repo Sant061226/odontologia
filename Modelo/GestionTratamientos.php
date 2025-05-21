@@ -1,6 +1,24 @@
 <?php
 class GestorTratamientos
 {
+    public function agregarTratamiento(Tratamientos $tratamiento)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $identificacion = $tratamiento->obtenerIdentificacion();
+        $fechasig = $tratamiento->obtenerFechasignacion();
+        $descripcion = $tratamiento->obtenerDescripcion();
+        $fechaini = $tratamiento->obtenerFechaInicio();
+        $fechafin = $tratamiento->obtenerFechaFin();
+        $observaciones = $tratamiento->obtenerObservaciones();
+        echo "<script>alert($descripcion);</script>";
+        echo $identificacion, $fechasig;
+        $sql = "INSERT INTO `tratamientos` (`TraNumero`, `TraFechaAsignado`, `TraDescripcion`, `TraFechaInicio`, `TraFechaFin`, `TraObservaciones`, `TraPaciente`) VALUES (NULL, '$fechasig', '$descripcion', '$fechaini', '$fechafin', '$observaciones', '$identificacion')";
+        $conexion->consulta($sql);
+        $tratamientoId = $conexion->obtenerCitaId();
+        $conexion->cerrar();
+        return $tratamientoId;
+    }
     public function consultarTratamiento($doc)
     {
         $conexion = new Conexion();
@@ -11,8 +29,7 @@ class GestorTratamientos
         $conexion->cerrar();
         return $result;
     }
-
-    public function consultarTratamientosPorDocumento($doc)
+    public function consultarTratamientosPorId($doc)
     {
         $conexion = new Conexion();
         $conexion->abrir();
@@ -24,24 +41,16 @@ class GestorTratamientos
         $conexion->cerrar();
         return $resultado;
     }
-
-    public function agregarTratamiento(Tratamientos $tratamiento)
+    public function consultarTratamientosPorDocumento($doc)
     {
         $conexion = new Conexion();
         $conexion->abrir();
-        $identificacion = $tratamiento->obtenerIdentificacion();
-        $fechasig = $tratamiento->obtenerFechasignacion();
-        $descripcion = $tratamiento->obtenerDescripcion();
-        $fechaini = $tratamiento->obtenerFechaInicio();
-        $fechafin = $tratamiento->obtenerFechaFin();
-        $observaciones = $tratamiento->obtenerObservaciones();
-        $sql = "INSERT INTO tratamientos 
-        (TraPaciente, TraFechaAsignado, TraDescripcion, TraFechaInicio, TraFechaFin, TraObservaciones) 
-        VALUES 
-        ('$identificacion', '$fechasig', '$descripcion', '$fechaini', '$fechafin', '$observaciones')";
+        $sql = "SELECT TraFechaAsignado, TraDescripcion, TraFechaInicio, TraFechaFin, TraObservaciones 
+            FROM tratamientos 
+            WHERE TraPaciente = '$doc'";
         $conexion->consulta($sql);
-        $filasAfectadas = $conexion->obtenerFilasAfectadas();
+        $resultado = $conexion->obtenerResult();
         $conexion->cerrar();
-        return $filasAfectadas;
+        return $resultado;
     }
 }

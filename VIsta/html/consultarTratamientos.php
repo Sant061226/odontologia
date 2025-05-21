@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-    <title>Asignar Cita</title>
-    <link rel="stylesheet" type="text/css" href="Vista/css/estilos.css">
-    <link href="Vista/jquery/jquery-ui-1.14.1/jquery-ui.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="Vista/jquery/jquery.js"></script>
-    <script src="Vista/jquery/jquery-ui-1.14.1/jquery-ui.js" type="text/javascript"></script>
-    <script src="Vista/js/script.js" type="text/javascript"></script>
-    <script>
-    </script>
-</head>
-
-<body>
-    <?php
+   <?php
     if ($result->num_rows > 0) {
         echo "<!--EXISTE-->";
     ?>
@@ -81,6 +64,8 @@
             }
             ?>
         </table>
+        <input type="button" name="agregarTratamiento" id="agregarTratamiento" value="Agregar Tratamiento" onclick="mostrarFormularioTrat()">
+
     <?php
     } else {
     ?>
@@ -89,60 +74,4 @@
     <?php
     }
     ?>
-    <div id="frmTratamiento" title="Agregar Nuevo Tratamiento">
-        <form id="agregarTratamiento">
-            <table>
-                <tr>
-                    <td>Documento</td>
-
-                    <td><input type="text" name="PacDocumento"
-
-                            id="PacDocumento"></td>
-                </tr>
-                <tr>
-
-                    <td>Fecha de asignación</td>
-
-                    <td><input type="date" name="fechasig"
-
-                            id="fechasig"></td>
-                </tr>
-                <tr>
-
-                    <td>Descripción</td>
-
-                    <td><input type="text" name="desc"
-
-                            id="desc"></td>
-                </tr>
-                <tr>
-
-                    <td>Fecha de inicio tratamiento</td>
-
-                    <td><input type="date" name="fechin"
-
-                            id="fechin"></td>
-                </tr>
-                <tr>
-
-                    <td>Fecha de fin tratamiento</td>
-
-                    <td><input type="date" name="fecfin"
-
-                            id="fecfin"></td>
-                </tr>
-                <tr>
-
-                    <td>Observaciones</td>
-
-                    <td><input type="text" name="obs"
-
-                            id="obs"></td>
-                </tr>
-            </table>
-        </form>
-    </div>
-    </div>
-</body>
-
-</html>
+   

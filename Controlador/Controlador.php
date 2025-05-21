@@ -22,19 +22,21 @@ class Controlador
         $result = $gestorCita->consultarCitaPorId($id);
         require_once 'Vista/html/confirmarCita.php';
     }
-    public function agregarTratamientos($doc, $fechasig, $descripcion, $fechaini, $fechafin, $observaciones)
+    public function agregarTratamiento($ide, $fec, $des, $fIn, $fFin, $obs)
     {
         $tratamiento = new Tratamientos(
-            $doc,
-            $fechasig,
-            $descripcion,
-            $fechaini,
-            $fechafin,
-            $observaciones
+            null,
+            $ide,
+            $fec,
+            $des,
+            $fIn,
+            $fFin,
+            $obs
         );
-        $tratamientos = new GestorTratamientos();
-        $id = $tratamientos->agregarTratamiento($tratamiento);
-        $result = $tratamientos->agregarTratamiento($doc);
+        $gestorTratamiento = new GestorTratamientos();
+        $gestorTratamiento->agregarTratamiento($tratamiento);
+        $result = $gestorTratamiento->consultarTratamiento($ide);
+        $resultado = $gestorTratamiento->consultarTratamientosPorId($ide);
         require_once 'Vista/html/consultarTratamientos.php';
     }
     public function consultarCitas($doc)

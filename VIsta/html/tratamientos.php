@@ -44,10 +44,62 @@
                         </td>
                     </tr>
                     <tr>
-                    </table>
-                </form>
-            </div>
+                </table>
+            </form>
         </div>
+    </div>
+
+     <div id="frmTratamiento" title="Agregar Nuevo Tratamiento">
+        <form id="agregarTratamiento">
+            <table>
+                <tr>
+                    <td>Documento</td>
+
+                    <td><input type="text" name="TratDocumento" id="TratDocumento" readonly></td>
+                </tr>
+                <tr>
+
+                    <td>Fecha de asignación</td>
+
+                    <td><input type="date" name="TraFechaAsignado"
+
+                            id="TraFechaAsignado"></td>
+                </tr>
+                <tr>
+
+                    <td>Descripción</td>
+
+                    <td><input type="text" name="TraDescripcion"
+
+                            id="TraDescripcion"></td>
+                </tr>
+                <tr>
+
+                    <td>Fecha de inicio tratamiento</td>
+
+                    <td><input type="date" name="TraFechaInicio"
+
+                            id="TraFechaInicio"></td>
+                </tr>
+                <tr>
+
+                    <td>Fecha de fin tratamiento</td>
+
+                    <td><input type="date" name="TraFechaFin"
+
+                            id="TraFechaFin"></td>
+                </tr>
+                <tr>
+
+                    <td>Observaciones</td>
+
+                    <td><input type="text" name="TraObservaciones"
+
+                            id="TraObservaciones"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </body>
 
 </html>

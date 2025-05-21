@@ -6,6 +6,7 @@ class Conexion
     private $result;
     private $filasAfectadas;
     private $citaId;
+    private $tratamientoId;
     public function abrir()
     {
         $this->mySQLI = new mysqli("localhost", "root", "", "citas");
@@ -38,8 +39,8 @@ class Conexion
     {
         return $this->citaId;
     }
-    public function obtenerTratamientoId()
+    public function obtenerTratId()
     {
-        return $this->TratamientoId;
+        return $this->tratamientoId;
     }
 }

@@ -4,7 +4,7 @@ function insertarPaciente() {
   $("#paciente").load(url);
   $("#frmPaciente").dialog("close");
 }
-function insertarPaciente() {
+function insertarTratamiento() {
   queryString = $("#agregarTratamiento").serialize();
   url = "index.php?accion=ingresarTratamiento&" + queryString;
   $("#paciente").load(url);
@@ -28,11 +28,11 @@ $(document).ready(function () {
 $(document).ready(function () {
   $("#frmTratamiento").dialog({
     autoOpen: false,
-    height: 310,
+    height: 350,
     width: 400,
     modal: true,
     buttons: {
-      Insertar: insertarPaciente,
+      Insertar: insertarTratamiento,
       Cancelar: cancelar,
     },
   });
@@ -62,18 +62,20 @@ function mostrarFormulario() {
 }
 function mostrarFormularioTrat() {
   documento = "" + $("#asignarDocumento").val();
-  $("#PacDocumento").attr("value", documento);
+  $("#TratDocumento").attr("value", documento);
   $("#frmTratamiento").dialog("open");
 }
 function insertarPaciente() {
   queryString = $("#agregarPaciente").serialize();
   url = "index.php?accion=ingresarPaciente&" + queryString;
   $("#paciente").load(url);
+  alert(queryString);
   $("#frmPaciente").dialog("close");
 }
-function insertarTrataiento() {
+function insertarTratamiento() {
   queryString = $("#agregarTratamiento").serialize();
-  url = "index.php?accion=ingresarPaciente&" + queryString;
+  url = "index.php?accion=ingresarTratamiento&" + queryString;
+  alert(queryString);
   $("#paciente").load(url);
   $("#frmTratamiento").dialog("close");
 }

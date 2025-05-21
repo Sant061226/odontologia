@@ -3,9 +3,9 @@ require_once 'Controlador/Controlador.php';
 require_once 'Modelo/GestionCita.php';
 require_once 'Modelo/Citas.php';
 require_once 'Modelo/Paciente.php';
-require_once 'Modelo/Conexion.php';
-require_once 'Modelo/Tratamientos.php';
 require_once 'Modelo/GestionTratamientos.php';
+require_once 'Modelo/Tratamientos.php';
+require_once 'Modelo/Conexion.php';
 $controlador = new Controlador();
 if (isset($_GET["accion"])) {
     if ($_GET["accion"] == "asignar") {
@@ -40,14 +40,13 @@ if (isset($_GET["accion"])) {
             $_GET["PacSexo"]
         );
     } elseif ($_GET["accion"] == "ingresarTratamiento") {
-        $controlador->agregarTratamientos(
-            $_GET["PacDocumento"],
-            $_GET["fechasig"],
-            $_GET["desc"],
-            $_GET["fechin"],
-            $_GET["fecfin"],
-            $_GET["obs"]
-
+        $controlador->agregarTratamiento(
+            $_GET["TratDocumento"],
+            $_GET["TraFechaAsignado"],
+            $_GET["TraDescripcion"],
+            $_GET["TraFechaInicio"],
+            $_GET["TraFechaFin"],
+            $_GET["TraObservaciones"]
         );
     } elseif ($_GET["accion"] == "consultarHora") {
         $controlador->consultarHorasDisponibles($_GET["medico"], $_GET["fecha"]);
