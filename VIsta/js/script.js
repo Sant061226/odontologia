@@ -6,7 +6,7 @@ function insertarPaciente() {
 }
 function insertarTratamiento() {
   queryString = $("#agregarTratamiento").serialize();
-  url = "index.php?accion=ingresarTratamiento&" + queryString;
+  url = "index.php?accion=guardarTratamiento&" + queryString;
   $("#paciente").load(url);
   $("#frmTratamiento").dialog("close");
 }
@@ -42,10 +42,10 @@ function consultarPaciente() {
     "index.php?accion=ConsultarPaciente&documento=" +
     $("#asignarDocumento").val();
   $("#paciente").load(url, function (response) {
-    if (response.indexOf("<!--EXISTE-->") !== -1){
+    if (response.indexOf("<!--EXISTE-->") !== -1) {
       $("#asignarEnviar").prop("disabled", false);
     } else {
-      $("#asignarEnviar").prop("disabled", true);   
+      $("#asignarEnviar").prop("disabled", true);
     }
   });
 }
@@ -61,8 +61,8 @@ function mostrarFormulario() {
   $("#frmPaciente").dialog("open");
 }
 function mostrarFormularioTrat() {
-  documento = "" + $("#asignarDocumento").val();
-  $("#TratDocumento").attr("value", documento);
+  var documento = $("#asignarDocumento").val();
+  $("#PacDocumento").val(documento);
   $("#frmTratamiento").dialog("open");
 }
 function insertarPaciente() {
@@ -71,13 +71,6 @@ function insertarPaciente() {
   $("#paciente").load(url);
   alert(queryString);
   $("#frmPaciente").dialog("close");
-}
-function insertarTratamiento() {
-  queryString = $("#agregarTratamiento").serialize();
-  url = "index.php?accion=ingresarTratamiento&" + queryString;
-  alert(queryString);
-  $("#paciente").load(url);
-  $("#frmTratamiento").dialog("close");
 }
 function cancelar() {
   $(this).dialog("close");
@@ -144,4 +137,77 @@ function confirmarCancelar(numero) {
     );
   }
   $("#cancelarConsultar").trigger("click");
+}
+function confirmarCancelarTrat(numero) {
+  if (confirm("Esta seguro de cancelar el tratamiento " + numero)) {
+    $.get(
+      "index.php",
+      { accion: "confirmarCancelarTrat", numero: numero },
+      function (mensaje) {
+        alert(mensaje);
+        var docPaciente = $("table").first().find("tr").eq(1).find("td").first().text().trim();
+        if (!docPaciente) {
+          docPaciente = $("#asignarDocumento").val();
+        }
+        $("#paciente").load("index.php?accion=ConsultarTratamientos&documento=" + docPaciente);
+      }
+    );
+  }
+  $("#cancelarConsultar").trigger("click");
+}
+function confirmarCancelarTrat(numero) {
+  if (confirm("Esta seguro de cancelar el tratamiento " + numero)) {
+    $.get(
+      "index.php",
+      { accion: "confirmarCancelarTrat", numero: numero },
+      function (mensaje) {
+        alert(mensaje);
+        var docPaciente = $("table").first().find("tr").eq(1).find("td").first().text().trim();
+        if (!docPaciente) {
+          docPaciente = $("#asignarDocumento").val();
+        }
+        $("#paciente").load("index.php?accion=ConsultarTratamientos&documento=" + docPaciente);
+      }
+    );
+  }
+  $("#cancelarConsultar").trigger("click");
+}
+$(document).ready(function () {
+  $("#frmEditarTratamiento").dialog({
+    autoOpen: false,
+    height: 350,
+    width: 400,
+    modal: true,
+    buttons: {
+      Guardar: function () {
+        var queryString = $("#editarTratamiento").serialize();
+        $.post(
+          "index.php?accion=EditarTratamientos",
+          queryString,
+          function (data) {
+            $("#paciente").html(data);
+          }
+        );
+        $("#frmEditarTratamiento").dialog("close");
+      },
+      Cancelar: function () {
+        $(this).dialog("close");
+      },
+    },
+  });
+});
+function confirmarEditarTrat(numero, docPaciente) {
+  var fila = $("td")
+    .filter(function () {
+      return $(this).text() == numero;
+    })
+    .closest("tr");
+
+  $("#editTraNumero").val(numero);
+  $("#editPacDocumento").val(docPaciente);
+  $("#editTraDescripcion").val(fila.find("td").eq(1).text());
+  $("#editTraFechaInicio").val(fila.find("td").eq(2).text());
+  $("#editTraFechaFin").val(fila.find("td").eq(3).text());
+  $("#editTraObservaciones").val(fila.find("td").eq(4).text());
+  $("#frmEditarTratamiento").dialog("open");
 }

@@ -4,6 +4,7 @@ class Conexion
     private $mySQLI;
     private $sql;
     private $result;
+    private $resultado;
     private $filasAfectadas;
     private $citaId;
     private $tratamientoId;
@@ -26,10 +27,15 @@ class Conexion
         $this->result = $this->mySQLI->query($this->sql);
         $this->filasAfectadas = $this->mySQLI->affected_rows;
         $this->citaId = $this->mySQLI->insert_id;
+        $this->tratamientoId = $this->mySQLI->insert_id;
     }
     public function obtenerResult()
     {
         return $this->result;
+    }
+    public function obtenerResultado()
+    {
+        return $this->resultado;
     }
     public function obtenerFilasAfectadas()
     {

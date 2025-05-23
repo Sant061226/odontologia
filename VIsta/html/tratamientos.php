@@ -49,13 +49,13 @@
         </div>
     </div>
 
-     <div id="frmTratamiento" title="Agregar Nuevo Tratamiento">
-        <form id="agregarTratamiento">
+    <div id="frmTratamiento" title="Agregar Nuevo Tratamiento">
+        <form id="agregarTratamiento" action="index.php?accion=guardarTratamiento" method="post">
             <table>
                 <tr>
                     <td>Documento</td>
 
-                    <td><input type="text" name="TratDocumento" id="TratDocumento" readonly></td>
+                    <td><input type="text" name="PacDocumento" id="PacDocumento"></td>
                 </tr>
                 <tr>
 
@@ -96,6 +96,38 @@
                     <td><input type="text" name="TraObservaciones"
 
                             id="TraObservaciones"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div id="frmEditarTratamiento" title="Editar Tratamiento">
+        <form id="editarTratamiento" method="post" action="index.php?accion=EditarTratamientos">
+            <input type="hidden" name="TraNumero" id="editTraNumero">
+            <table>
+                <tr>
+                    <td>Documento</td>
+                    <td><input type="text" name="PacDocumento" id="editPacDocumento" readonly></td>
+                </tr>
+                <tr>
+                    <td>Fecha de asignación</td>
+                    <td><input type="date" name="TraFechaAsignado" id="editTraFechaAsignado"></td>
+                </tr>
+                <tr>
+                    <td>Descripción</td>
+                    <td><input type="text" name="TraDescripcion" id="editTraDescripcion"></td>
+                </tr>
+                <tr>
+                    <td>Fecha de inicio</td>
+                    <td><input type="date" name="TraFechaInicio" id="editTraFechaInicio"></td>
+                </tr>
+                <tr>
+                    <td>Fecha de fin</td>
+                    <td><input type="date" name="TraFechaFin" id="editTraFechaFin"></td>
+                </tr>
+                <tr>
+                    <td>Observaciones</td>
+                    <td><input type="text" name="TraObservaciones" id="editTraObservaciones"></td>
                 </tr>
             </table>
         </form>

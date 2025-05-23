@@ -35,8 +35,9 @@ class Controlador
         );
         $gestorTratamiento = new GestorTratamientos();
         $gestorTratamiento->agregarTratamiento($tratamiento);
-        $result = $gestorTratamiento->consultarTratamiento($ide);
-        $resultado = $gestorTratamiento->consultarTratamientosPorId($ide);
+        $id = $gestorTratamiento->agregarTratamiento($tratamiento);
+        $result = $gestorTratamiento->consultarTratamiento($id);
+        $resultado = $gestorTratamiento->consultarTratamientosPorId($id);
         require_once 'Vista/html/consultarTratamientos.php';
     }
     public function consultarCitas($doc)
@@ -50,6 +51,12 @@ class Controlador
         $gestorCita = new GestorCita();
         $result = $gestorCita->consultarCitasPorDocumento($doc);
         require_once 'Vista/html/cancelarCitas.php';
+    }
+    public function cancelarTratamiento($doc)
+    {
+        $gestorTratamiento = new GestorTratamientos();
+        $result = $gestorTratamiento->consultarTratamientosPorDocumento($doc);
+        require_once 'Vista/html/consultarTratamientos.php';
     }
     public function consultarPaciente($doc)
     {
@@ -106,5 +113,33 @@ class Controlador
         } else {
             echo "Hubo un error al cancelar la cita";
         }
+    }
+    public function confirmarCancelarTratamiento($trata)
+    {
+        $gestorTratamiento = new GestorTratamientos();
+        $registros = $gestorTratamiento->cancelarTratamiento($trata);
+        if ($registros > 0) {
+            echo "El tratamiento se ha cancelado con éxito";
+        } else {
+            echo "Hubo un error al cancelar el tratamiento";
+        }
+    }
+    public function editarTratamiento($num, $ide, $fec, $des, $fIn, $fFin, $obs)
+    {
+        $tratamiento = new Tratamientos(
+            $num,
+            $ide,
+            $fec,
+            $des,
+            $fIn,
+            $fFin,
+            $obs
+        );
+        $gestorTratamiento = new GestorTratamientos();
+        $gestorTratamiento->EditarTratamiento($tratamiento);
+
+        $result = $gestorTratamiento->consultarTratamiento($ide);
+        $resultado = $gestorTratamiento->consultarTratamientosPorDocumento($ide);
+        require_once 'Vista/html/consultarTratamientos.php';
     }
 }

@@ -2,9 +2,8 @@
 <html>
 
 <head>
-    <title>Información General</title>
+    <title>Sistema de Gestión Odontológica</title>
     <link rel="stylesheet" type="text/css" href="Vista/css/estilos.css">
-    
 </head>
 
 <body>
@@ -21,19 +20,8 @@
 
         </ul>
         <div id="contenido">
-            <h2>Información General</h2>
-            <p>El Sistema de Gestión Odontológica permite administrar la información de los
-                pacientes,
-
-                tratamientos y citas a través de una interfaz web.</p>
-            <p>El sistema cuenta con las siguientes secciones:
-            <ul>
-                <li>Asignar cita</li>
-                <li>Consultar cita</li>
-                <li>Cancelar cita</li>
-                <li>Consultar tratamientos</li>
-            </ul>
-            </p>
+            <h2>Título de página</h2>
+            <p>Contenido de la página</p>
         </div>
     </div>
 </body>
