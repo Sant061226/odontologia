@@ -142,4 +142,14 @@ class Controlador
         $resultado = $gestorTratamiento->consultarTratamientosPorDocumento($ide);
         require_once 'Vista/html/consultarTratamientos.php';
     }
+    public function inicioSesion($identificacion, $contrasena)
+    {
+        $gestionUsuarios = new GestorCita();
+        $usuario = $gestionUsuarios->verificarUsuario($identificacion, $contrasena);
+        if ($usuario) {
+            session_start();
+            $_SESSION['usuario_id'] = $usuario->PacIdentificacion;
+            $_SESSION['rol'] = $usuario->Rol;
+        }
+    }
 }

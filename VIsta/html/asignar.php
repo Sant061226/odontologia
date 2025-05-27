@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Asignar Cita</title>
     <link rel="stylesheet" type="text/css" href="Vista/css/estilos.css">
     <link href="Vista/jquery/jquery-ui-1.14.1/jquery-ui.css" rel="stylesheet" type="text/css" />
-    
+
     <script type="text/javascript" src="Vista/jquery/jquery.js"></script>
     <script src="Vista/jquery/jquery-ui-1.14.1/jquery-ui.js" type="text/javascript"></script>
     <script src="Vista/js/script.js" type="text/javascript"></script>
@@ -23,6 +24,8 @@
             <li><a href="index.php?accion=consultar">Consultar Cita</a> </li>
             <li><a href="index.php?accion=cancelar">Cancelar Cita</a> </li>
             <li><a href="index.php?accion=tratamientos">Tratamientos</a> </li>
+            <li><a href="index.php?accion=consultorios">Consultorios</a> </li>
+            <li><a href="index.php?accion=medicos">Medicos</a> </li>
         </ul>
         <div id="contenido">
             <h2>Asignar cita</h2>
@@ -47,7 +50,7 @@
                     <tr>
                         <td>Médico</td>
                         <td>
-                            <select id="medico" name="medico" onchange="cargarHoras()" >
+                            <select id="medico" name="medico" onchange="cargarHoras()">
                                 <option value="-1" selected="selected">---Selecione el
                                     Médico</option>
                                 <?php
@@ -91,11 +94,11 @@
                             </select>
                         </td>
                     </tr>
-                      <tr>
+                    <tr>
                         <td>Hora</td>
                         <td>
-                            <select id="hora" name="hora" onmousedown="seleccionarHora()" >
-                                <option value="-1" selected="selected" >---Seleccione
+                            <select id="hora" name="hora" onmousedown="seleccionarHora()">
+                                <option value="-1" selected="selected">---Seleccione
                                     la hora ---</option>
 
                             </select>

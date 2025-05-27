@@ -117,4 +117,21 @@ CitFecha = '$fecha'"
         $conexion->cerrar();
         return $filasAfectadas;
     }
+    public function verificarUsuario($identificacion, $contrasena)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT * FROM pacientes WHERE PacIdentificacion = '$identificacion'";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $usuario = $result->fetch_object();
+        $conexion->cerrar();
+
+        // Usa el nombre correcto de la columna de contraseña
+        if ($usuario && password_verify($contrasena, $usuario->PacContrasena)) {
+            return $usuario;
+        } else {
+            return false;
+        }
+    }
 }

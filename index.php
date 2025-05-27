@@ -6,12 +6,27 @@ require_once 'Modelo/Paciente.php';
 require_once 'Modelo/GestionTratamientos.php';
 require_once 'Modelo/Tratamientos.php';
 require_once 'Modelo/Conexion.php';
+require_once 'Modelo/GestionMedicos.php';
+require_once 'Modelo/Medicos.php';
 $controlador = new Controlador();
 if (isset($_GET["accion"])) {
     if ($_GET["accion"] == "asignar") {
         $controlador->cargarAsignar();
     } elseif ($_GET["accion"] == "consultar") {
         $controlador->verPagina('Vista/html/consultar.php');
+    } elseif ($_GET["accion"] == "ingresar") {
+        $controlador->inicioSesion(
+            $_POST["identificacion"],
+            $_POST["contrasena"],
+            $_POST["clase"]
+        );
+        if ($_POST["clase"] == 1) {
+                $controlador->verPagina('Vista/html/inicio.php');
+            } elseif ($_POST["clase"] == 2) {
+                $controlador->verPagina('Vista/html/tratamientos.php');
+            } elseif ($_POST["clase"] == 3) {
+                $controlador->verPagina('Vista/html/consultar.php');
+            }
     } elseif ($_GET["accion"] == "cancelar") {
         $controlador->verPagina('Vista/html/cancelar.php');
     } elseif ($_GET["accion"] == "tratamientos") {
@@ -71,5 +86,5 @@ if (isset($_GET["accion"])) {
         );
     }
 } else {
-    $controlador->verPagina('Vista/html/inicio.php');
+    $controlador->verPagina('Vista/html/login.php');
 }
