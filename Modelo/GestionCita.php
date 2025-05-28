@@ -65,9 +65,10 @@ as consultorios ,citas "
         $apellidos = $paciente->obtenerApellidos();
         $fechaNacimiento = $paciente->obtenerFechaNacimiento();
         $sexo = $paciente->obtenerSexo();
-        $sql = "INSERT INTO Pacientes VALUES (
-'$identificacion','$nombres','$apellidos',"
-            . "'$fechaNacimiento','$sexo')";
+        $contrasena = $paciente->obtenerContrasena();
+        $hash = password_hash($contrasena, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO Pacientes (PacIdentificacion, PacNombres, PacApellidos, PacFechaNacimiento, PacSexo, PacContrasena)
+                VALUES ('$identificacion','$nombres','$apellidos','$fechaNacimiento','$sexo','$hash')";
         $conexion->consulta($sql);
         $filasAfectadas = $conexion->obtenerFilasAfectadas();
         $conexion->cerrar();
@@ -116,22 +117,5 @@ CitFecha = '$fecha'"
         $filasAfectadas = $conexion->obtenerFilasAfectadas();
         $conexion->cerrar();
         return $filasAfectadas;
-    }
-    public function verificarUsuario($identificacion, $contrasena)
-    {
-        $conexion = new Conexion();
-        $conexion->abrir();
-        $sql = "SELECT * FROM pacientes WHERE PacIdentificacion = '$identificacion'";
-        $conexion->consulta($sql);
-        $result = $conexion->obtenerResult();
-        $usuario = $result->fetch_object();
-        $conexion->cerrar();
-
-        // Usa el nombre correcto de la columna de contraseña
-        if ($usuario && password_verify($contrasena, $usuario->PacContrasena)) {
-            return $usuario;
-        } else {
-            return false;
-        }
     }
 }

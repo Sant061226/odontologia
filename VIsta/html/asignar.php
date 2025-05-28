@@ -12,7 +12,6 @@
     <script>
     </script>
 </head>
-
 <body>
     <div id="contenedor">
         <div id="encabezado">
@@ -24,8 +23,6 @@
             <li><a href="index.php?accion=consultar">Consultar Cita</a> </li>
             <li><a href="index.php?accion=cancelar">Cancelar Cita</a> </li>
             <li><a href="index.php?accion=tratamientos">Tratamientos</a> </li>
-            <li><a href="index.php?accion=consultorios">Consultorios</a> </li>
-            <li><a href="index.php?accion=medicos">Medicos</a> </li>
         </ul>
         <div id="contenido">
             <h2>Asignar cita</h2>
@@ -120,7 +117,7 @@
 
                             <td><input type="text" name="PacDocumento"
 
-                                    id="PacDocumento"></td>
+                                    id="PacDocumento" readonly></td>
                         </tr>
                         <tr>
 
@@ -160,6 +157,14 @@
 
                                 </select>
                             </td>
+                        </tr>
+                        <tr>
+
+                            <td>Crear contraseña</td>
+
+                            <td><input type="password" name="PacContraseña"
+
+                                    id="PacContraseña"></td>
                         </tr>
                     </table>
                 </form>

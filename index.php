@@ -8,25 +8,26 @@ require_once 'Modelo/Tratamientos.php';
 require_once 'Modelo/Conexion.php';
 require_once 'Modelo/GestionMedicos.php';
 require_once 'Modelo/Medicos.php';
+require_once 'Modelo/GestionSesion.php';
 $controlador = new Controlador();
 if (isset($_GET["accion"])) {
     if ($_GET["accion"] == "asignar") {
         $controlador->cargarAsignar();
     } elseif ($_GET["accion"] == "consultar") {
         $controlador->verPagina('Vista/html/consultar.php');
-    } elseif ($_GET["accion"] == "ingresar") {
+    } if ($_GET["accion"] == "ingresar") {
         $controlador->inicioSesion(
             $_POST["identificacion"],
             $_POST["contrasena"],
             $_POST["clase"]
         );
         if ($_POST["clase"] == 1) {
-                $controlador->verPagina('Vista/html/inicio.php');
-            } elseif ($_POST["clase"] == 2) {
-                $controlador->verPagina('Vista/html/tratamientos.php');
-            } elseif ($_POST["clase"] == 3) {
-                $controlador->verPagina('Vista/html/consultar.php');
-            }
+            $controlador->verPagina('Vista/html/inicio.php');
+        } elseif ($_POST["clase"] == 2) {
+            $controlador->verPagina('Vista/html/tratamientos.php');
+        } elseif ($_POST["clase"] == 3) {
+            $controlador->verPagina('Vista/html/consultar.php');
+        }
     } elseif ($_GET["accion"] == "cancelar") {
         $controlador->verPagina('Vista/html/cancelar.php');
     } elseif ($_GET["accion"] == "tratamientos") {
@@ -62,7 +63,8 @@ if (isset($_GET["accion"])) {
             $_GET["PacNombres"],
             $_GET["PacApellidos"],
             $_GET["PacNacimiento"],
-            $_GET["PacSexo"]
+            $_GET["PacSexo"],
+            $_GET["PacContraseña"],
         );
     } elseif ($_GET["accion"] == "consultarHora") {
         $controlador->consultarHorasDisponibles($_GET["medico"], $_GET["fecha"]);

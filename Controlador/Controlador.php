@@ -71,15 +71,15 @@ class Controlador
         $resultado = $tratamiento->consultarTratamientosPorDocumento($doc);
         require_once 'Vista/html/consultarTratamientos.php';
     }
-    public function agregarPaciente($doc, $nom, $ape, $fec, $sex)
+    public function agregarPaciente($doc, $nom, $ape, $fec, $sex, $contr)
     {
-        $paciente = new Paciente($doc, $nom, $ape, $fec, $sex);
+        $paciente = new Paciente($doc, $nom, $ape, $fec, $sex, $contr);
         $gestorCita = new GestorCita();
         $registros = $gestorCita->agregarPaciente($paciente);
         if ($registros > 0) {
             echo "Se insertó el paciente con exito";
         } else {
-            echo "Error al grabar el paciente";
+            echo "Error al guardar el paciente";
         }
     }
     public function cargarAsignar()
@@ -142,14 +142,34 @@ class Controlador
         $resultado = $gestorTratamiento->consultarTratamientosPorDocumento($ide);
         require_once 'Vista/html/consultarTratamientos.php';
     }
-    public function inicioSesion($identificacion, $contrasena)
+    public function inicioSesion($identificacion, $contrasena, $rol)
     {
-        $gestionUsuarios = new GestorCita();
-        $usuario = $gestionUsuarios->verificarUsuario($identificacion, $contrasena);
-        if ($usuario) {
-            session_start();
-            $_SESSION['usuario_id'] = $usuario->PacIdentificacion;
-            $_SESSION['rol'] = $usuario->Rol;
+        session_start();
+        $usuario = false;
+
+        if ($rol == 2) { 
+            require_once 'Modelo/GestionSesion.php';
+            $gestionUsuarios = new GestorSesion();
+            $usuario = $gestionUsuarios->verificarUsuario($identificacion, $contrasena, $rol);
+            if ($usuario) {
+                $_SESSION['usuario_id'] = $usuario->PacIdentificacion;
+                $_SESSION['rol'] = $rol;
+                header("Location: index.php?accion=tratamientos");
+                exit();
+            }
+        } elseif ($rol == 1) {
+            require_once 'Modelo/GestionMedicos.php';
+            $gestionUsuarios = new GestionMedicos();
+            $usuario = $gestionUsuarios->verificarUsuario($identificacion, $contrasena, $rol);
+            if ($usuario) {
+                $_SESSION['usuario_id'] = $usuario->identificacion;
+                $_SESSION['rol'] = $rol;
+                header("Location: index.php?accion=inicio");
+                exit();
+            }
+        } elseif ($rol == 3) {
+            header("Location: index.php?accion=consultar");
+            exit();
         }
     }
 }
