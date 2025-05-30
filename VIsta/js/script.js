@@ -145,11 +145,20 @@ function confirmarCancelarTrat(numero) {
       { accion: "confirmarCancelarTrat", numero: numero },
       function (mensaje) {
         alert(mensaje);
-        var docPaciente = $("table").first().find("tr").eq(1).find("td").first().text().trim();
+        var docPaciente = $("table")
+          .first()
+          .find("tr")
+          .eq(1)
+          .find("td")
+          .first()
+          .text()
+          .trim();
         if (!docPaciente) {
           docPaciente = $("#asignarDocumento").val();
         }
-        $("#paciente").load("index.php?accion=ConsultarTratamientos&documento=" + docPaciente);
+        $("#paciente").load(
+          "index.php?accion=ConsultarTratamientos&documento=" + docPaciente
+        );
       }
     );
   }
@@ -162,11 +171,20 @@ function confirmarCancelarTrat(numero) {
       { accion: "confirmarCancelarTrat", numero: numero },
       function (mensaje) {
         alert(mensaje);
-        var docPaciente = $("table").first().find("tr").eq(1).find("td").first().text().trim();
+        var docPaciente = $("table")
+          .first()
+          .find("tr")
+          .eq(1)
+          .find("td")
+          .first()
+          .text()
+          .trim();
         if (!docPaciente) {
           docPaciente = $("#asignarDocumento").val();
         }
-        $("#paciente").load("index.php?accion=ConsultarTratamientos&documento=" + docPaciente);
+        $("#paciente").load(
+          "index.php?accion=ConsultarTratamientos&documento=" + docPaciente
+        );
       }
     );
   }
@@ -211,3 +229,34 @@ function confirmarEditarTrat(numero, docPaciente) {
   $("#editTraObservaciones").val(fila.find("td").eq(4).text());
   $("#frmEditarTratamiento").dialog("open");
 }
+$(document).ready(function () {
+  var btn = document.getElementById("btnMostrarEliminar");
+  var form = document.getElementById("formEliminar");
+  if (btn && form) {
+    btn.onclick = function () {
+      form.style.display = "inline";
+      this.style.display = "none";
+    };
+  }
+});
+$(document).ready(function () {
+  var btnAgregar = document.getElementById("btnAgregarConsultorio");
+  var formAgregar = document.getElementById("formAgregarConsultorio");
+  if (btnAgregar && formAgregar) {
+    btnAgregar.onclick = function () {
+      formAgregar.style.display = "block";
+      btnAgregar.style.display = "none";
+    };
+  }
+});
+document.getElementById("btnAgregarConsultorio").onclick = function () {
+  var form = document.getElementById("formAgregarConsultorio");
+  form.classList.add("show");
+  this.style.display = "none";
+};
+document.getElementById("btnCancelarAgregar").onclick = function () {
+  var form = document.getElementById("formAgregarConsultorio");
+  form.classList.remove("show");
+  document.getElementById("btnAgregarConsultorio").style.display =
+    "inline-block";
+};

@@ -17,7 +17,7 @@
         <div id="encabezado">
             <h1>Sistema de Gestión Odontológica</h1>
         </div>
-        <form action="index.php?accion=ingresar" method="post" id="formulario">
+        <form action="index.php?accion=login" method="post" id="formulario">
             <h3>Iniciar Sesión</h3>
             <hr>
             <select id="clase" name="clase">

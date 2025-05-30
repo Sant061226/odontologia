@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'Controlador/Controlador.php';
 require_once 'Modelo/GestionCita.php';
 require_once 'Modelo/Citas.php';
@@ -6,32 +7,31 @@ require_once 'Modelo/Paciente.php';
 require_once 'Modelo/GestionTratamientos.php';
 require_once 'Modelo/Tratamientos.php';
 require_once 'Modelo/Conexion.php';
-require_once 'Modelo/GestionMedicos.php';
-require_once 'Modelo/Medicos.php';
 require_once 'Modelo/GestionSesion.php';
+require_once 'Modelo/Sesion.php';
 $controlador = new Controlador();
 if (isset($_GET["accion"])) {
+    switch ($_GET["accion"]) {
+        case 'login':
+            $controlador->inicioSesion(
+                $_POST["identificacion"],
+                $_POST["contrasena"],
+                $_POST["clase"]
+            );
+            break;
+    }
     if ($_GET["accion"] == "asignar") {
         $controlador->cargarAsignar();
     } elseif ($_GET["accion"] == "consultar") {
         $controlador->verPagina('Vista/html/consultar.php');
-    } if ($_GET["accion"] == "ingresar") {
-        $controlador->inicioSesion(
-            $_POST["identificacion"],
-            $_POST["contrasena"],
-            $_POST["clase"]
-        );
-        if ($_POST["clase"] == 1) {
-            $controlador->verPagina('Vista/html/inicio.php');
-        } elseif ($_POST["clase"] == 2) {
-            $controlador->verPagina('Vista/html/tratamientos.php');
-        } elseif ($_POST["clase"] == 3) {
-            $controlador->verPagina('Vista/html/consultar.php');
-        }
     } elseif ($_GET["accion"] == "cancelar") {
         $controlador->verPagina('Vista/html/cancelar.php');
+    } elseif ($_GET["accion"] == "logout") {
+        $controlador->cerrarSesion();
     } elseif ($_GET["accion"] == "tratamientos") {
         $controlador->verPagina('Vista/html/tratamientos.php');
+    } elseif ($_GET["accion"] == "inicio") {
+        $controlador->verPagina('Vista/html/inicio.php');
     } elseif ($_GET["accion"] == "guardarCita") {
         $controlador->agregarCita(
             $_POST["asignarDocumento"],
@@ -86,6 +86,17 @@ if (isset($_GET["accion"])) {
             $_POST["TraFechaFin"],
             $_POST["TraObservaciones"]
         );
+    } elseif ($_GET["accion"] == "consultorio") {
+        $editarNumero = isset($_GET["editar"]) ? $_GET["editar"] : null;
+        $controlador->mostrarConsultorio($editarNumero);
+    } elseif ($_GET["accion"] == "eliminarConsultorio") {
+        $controlador->eliminarConsultorio($_GET["numero"]);
+    } elseif ($_GET["accion"] == "editarConsultorio") {
+        $controlador->editarConsultorio($_GET["numero"]);
+    } elseif ($_GET["accion"] == "actualizarConsultorio") {
+        $controlador->actualizarConsultorio($_GET["numero"], $_GET["nombre"]);
+    } elseif ($_GET["accion"] == "agregarConsultorio") {
+        $controlador->agregarConsultorio($_GET["numero"], $_GET["nombre"]);
     }
 } else {
     $controlador->verPagina('Vista/html/login.php');

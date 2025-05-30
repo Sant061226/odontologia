@@ -17,8 +17,10 @@
             <li><a href="index.php?accion=consultar">Consultar Cita</a> </li>
             <li><a href="index.php?accion=cancelar">Cancelar Cita</a> </li>
             <li><a href="index.php?accion=tratamientos">Tratamientos</a> </li>
-            <li><a href="index.php?accion=consultorios">Consultorios</a> </li>
+            <li><a href="index.php?accion=consultorio">Consultorios</a> </li>
             <li><a href="index.php?accion=medicos">Medicos</a> </li>
+            <li><a href="index.php?accion=logout">Cerrar sesión</a></li>
+
         </ul>
         <div id="contenido">
             <h2>Título de página</h2>

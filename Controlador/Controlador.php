@@ -5,6 +5,36 @@ class Controlador
     {
         require_once $ruta;
     }
+    public function inicioSesion($identificacion, $contrasena, $rol)
+    {
+        $gestionUsuarios = new GestorSesion();
+        $sesion = new Sesion($identificacion, $contrasena, $rol);
+        $usuario = $gestionUsuarios->verificarUsuario($sesion);
+        if ($rol == 2) {
+            $_SESSION['usuario_id'] = $usuario->PacIdentificacion;
+            $_SESSION['rol'] = $rol;
+            header("Location: index.php?accion=tratamientos");
+            exit();
+        } elseif ($rol == 1) {
+            $_SESSION['usuario_id'] = $usuario->MedIdentificacion;
+            $_SESSION['rol'] = $rol;
+            header("Location: index.php?accion=inicio");
+            exit();
+        } elseif ($rol == 3) {
+            $_SESSION['usuario_id'] = $usuario->AdIdentificacion;
+            $_SESSION['rol'] = $rol;
+            header("Location: index.php?accion=consultorio");
+            exit();
+        }
+    }
+    public function cerrarSesion()
+    {
+        if (isset($_SESSION["usuario"])) {
+            unset($_SESSION["usuario"]);
+        }
+        session_destroy();
+        header("Location:index.php");
+    }
     public function agregarCita($doc, $med, $fec, $hor, $con)
     {
         $cita = new Cita(
@@ -142,34 +172,53 @@ class Controlador
         $resultado = $gestorTratamiento->consultarTratamientosPorDocumento($ide);
         require_once 'Vista/html/consultarTratamientos.php';
     }
-    public function inicioSesion($identificacion, $contrasena, $rol)
+    public function mostrarConsultorio($editarNumero = null)
     {
-        session_start();
-        $usuario = false;
-
-        if ($rol == 2) { 
-            require_once 'Modelo/GestionSesion.php';
-            $gestionUsuarios = new GestorSesion();
-            $usuario = $gestionUsuarios->verificarUsuario($identificacion, $contrasena, $rol);
-            if ($usuario) {
-                $_SESSION['usuario_id'] = $usuario->PacIdentificacion;
-                $_SESSION['rol'] = $rol;
-                header("Location: index.php?accion=tratamientos");
-                exit();
-            }
-        } elseif ($rol == 1) {
-            require_once 'Modelo/GestionMedicos.php';
-            $gestionUsuarios = new GestionMedicos();
-            $usuario = $gestionUsuarios->verificarUsuario($identificacion, $contrasena, $rol);
-            if ($usuario) {
-                $_SESSION['usuario_id'] = $usuario->identificacion;
-                $_SESSION['rol'] = $rol;
-                header("Location: index.php?accion=inicio");
-                exit();
-            }
-        } elseif ($rol == 3) {
-            header("Location: index.php?accion=consultar");
-            exit();
+        $gestorCita = new GestorCita();
+        $result = $gestorCita->consultarConsultorios();
+        $consultorioEditar = null;
+        if ($editarNumero) {
+            $consultorioEditar = $gestorCita->consultarConsultorioPorNumero($editarNumero);
         }
+        require 'Vista/html/consultorio.php';
+    }
+    public function eliminarConsultorio($numero)
+    {
+        $gestorCita = new GestorCita();
+        if ($gestorCita->tieneCitasAgendadas($numero)) {
+            $mensaje = "Error, No se puede eliminar consultorio.";
+        } else {
+            $gestorCita->eliminarConsultorio($numero);
+            $mensaje = "Consultorio eliminado";
+        }
+        $result = $gestorCita->consultarConsultorios();
+        require 'Vista/html/consultorio.php';
+    }
+    public function editarConsultorio($numero)
+    {
+        $gestorCita = new GestorCita();
+        $consultorio = $gestorCita->consultarConsultorioPorNumero($numero);
+        require 'Vista/html/editarConsultorio.php';
+    }
+
+    public function actualizarConsultorio($numero, $nombre)
+    {
+        $gestorCita = new GestorCita();
+        $gestorCita->actualizarConsultorio($numero, $nombre);
+        $result = $gestorCita->consultarConsultorios();
+        $mensaje = "Consultorio actualizado";
+        require 'Vista/html/consultorio.php';
+    }
+    public function agregarConsultorio($numero, $nombre)
+    {
+        $gestorCita = new GestorCita();
+        if ($gestorCita->existeConsultorioPorNumero($numero)) {
+            $mensaje = "Error, ya existe un consultorio con ese número.";
+        } else {
+            $gestorCita->agregarConsultorio($numero, $nombre);
+            $mensaje = "Consultorio agregado";
+        }
+        $result = $gestorCita->consultarConsultorios();
+        require 'Vista/html/consultorio.php';
     }
 }
