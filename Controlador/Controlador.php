@@ -26,6 +26,9 @@ class Controlador
             header("Location: index.php?accion=consultorio");
             exit();
         }
+        else {
+            echo "<script>alert('Usuario o contraseña incorrectos');window.location='index.php';</script>";
+        }
     }
     public function cerrarSesion()
     {

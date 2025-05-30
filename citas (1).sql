@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-05-2025 a las 00:15:18
+-- Tiempo de generación: 31-05-2025 a las 00:30:06
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -65,7 +65,8 @@ CREATE TABLE `citas` (
 
 INSERT INTO `citas` (`CitNumero`, `CitFecha`, `CitHora`, `CitPaciente`, `CitMedico`, `CitConsultorio`, `CitEstado`, `CitObservaciones`) VALUES
 (1, '2025-05-21', '11:20:00', '1', '12345', 1, 'Cancelada', 'Ninguna'),
-(2, '2025-05-21', '11:00:00', '1', '12345', 1, 'Cancelada', 'Ninguna');
+(2, '2025-05-21', '11:00:00', '1', '12345', 1, 'Cancelada', 'Ninguna'),
+(4, '2025-05-17', '11:00:00', '1', '12345', 2, 'Solicitada', 'Ninguna');
 
 -- --------------------------------------------------------
 
@@ -84,7 +85,8 @@ CREATE TABLE `consultorios` (
 
 INSERT INTO `consultorios` (`ConNumero`, `ConNombre`) VALUES
 (1, 'Consultas'),
-(2, 'Tratamientos');
+(2, 'Tratamientos'),
+(3, 'Cirugias');
 
 -- --------------------------------------------------------
 
@@ -167,7 +169,8 @@ INSERT INTO `pacientes` (`PacIdentificacion`, `PacNombres`, `PacApellidos`, `Pac
 ('123', 'Joan', 'G', '2005-10-25', 'M', '', 2),
 ('124', 'Joas', 'Ldea', '2025-05-04', 'M', '', 2),
 ('13', 'sdfgh', 'mkl', '1975-11-11', 'M', '$2y$10$qOHQ/uM/geukyLpoLNu.IO3v/QQx2Ccmc', 2),
-('3', 'def', 'grgr', '2025-04-28', 'M', '', 2);
+('3', 'def', 'grgr', '2025-04-28', 'M', '', 2),
+('7', 'Hola', 'Chao', '2025-04-30', 'M', '$2y$10$ruF8lfLxt8.O1GAC.M9xrOEkXk8Kx06P4', 2);
 
 -- --------------------------------------------------------
 
@@ -270,7 +273,7 @@ ALTER TABLE `tratamientos`
 -- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
-  MODIFY `CitNumero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `CitNumero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tratamientos`
