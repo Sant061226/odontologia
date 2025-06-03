@@ -10,30 +10,32 @@ class Controlador
         $gestionUsuarios = new GestorSesion();
         $sesion = new Sesion($identificacion, $contrasena, $rol);
         $usuario = $gestionUsuarios->verificarUsuario($sesion);
-        if ($rol == 2) {
-            $_SESSION['usuario_id'] = $usuario->PacIdentificacion;
-            $_SESSION['rol'] = $rol;
-            header("Location: index.php?accion=tratamientos");
-            exit();
-        } elseif ($rol == 1) {
-            $_SESSION['usuario_id'] = $usuario->MedIdentificacion;
-            $_SESSION['rol'] = $rol;
-            header("Location: index.php?accion=inicio");
-            exit();
-        } elseif ($rol == 3) {
-            $_SESSION['usuario_id'] = $usuario->AdIdentificacion;
-            $_SESSION['rol'] = $rol;
-            header("Location: index.php?accion=consultorio");
-            exit();
-        }
-        else {
+        if ($usuario) {
+            if ($rol == 2) {
+                $_SESSION['usuario_id'] = $usuario->PacIdentificacion;
+                $_SESSION['rol'] = $rol;
+                header("Location: index.php?accion=inicio");
+                exit();
+            } elseif ($rol == 1) {
+                $_SESSION['usuario_id'] = $usuario->MedIdentificacion;
+                $_SESSION['rol'] = $rol;
+                header("Location: index.php?accion=inicio");
+                exit();
+            } elseif ($rol == 3) {
+                $_SESSION['usuario_id'] = $usuario->AdIdentificacion;
+                $_SESSION['rol'] = $rol;
+                header("Location: index.php?accion=inicio");
+                exit();
+            }
+        } else {
             echo "<script>alert('Usuario o contraseña incorrectos');window.location='index.php';</script>";
         }
     }
     public function cerrarSesion()
     {
-        if (isset($_SESSION["usuario"])) {
-            unset($_SESSION["usuario"]);
+        if (isset($_SESSION['usuario_id']) && isset($_SESSION['rol'])) {
+            unset($_SESSION['usuario_id']);
+            unset($_SESSION['rol']);
         }
         session_destroy();
         header("Location:index.php");
@@ -56,7 +58,7 @@ class Controlador
         require_once 'Vista/html/confirmarCita.php';
     }
     public function agregarTratamiento($ide, $fec, $des, $fIn, $fFin, $obs)
-    {
+   {
         $tratamiento = new Tratamientos(
             null,
             $ide,

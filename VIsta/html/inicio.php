@@ -4,7 +4,6 @@
 <head>
     <title>Información General</title>
     <link rel="stylesheet" type="text/css" href="Vista/css/estilos.css">
-
 </head>
 
 <body>
@@ -13,30 +12,46 @@
             <h1>Sistema de Gestión Odontológica</h1>
         </div>
         <ul id="menu">
-            <li><a href="index.php?accion=inicio">inicio</a> </li>
-            <li><a href="index.php?accion=asignar">Asignar</a> </li>
-            <li><a href="index.php?accion=consultar">Consultar Cita</a> </li>
-            <li><a href="index.php?accion=cancelar">Cancelar Cita</a> </li>
-            <li><a href="index.php?accion=tratamientos">Tratamientos</a> </li>
-            <li><a href="index.php?accion=consultorio">Consultorios</a> </li>
-            <li><a href="index.php?accion=medicos">Medicos</a> </li>
+            <li><a href="index.php?accion=inicio">Inicio</a></li>
+            <?php if ($_SESSION['rol'] == 1): ?>
+                <li class="activa"><a href="index.php?accion=asignar">Asignar Cita</a> </li>
+                <li><a href="index.php?accion=consultar">Consultar Cita</a></li>
+                <li><a href="index.php?accion=cancelar">Cancelar Cita</a></li>
+                <li><a href="index.php?accion=consultorio">Consultorios</a></li>
+                <li><a href="index.php?accion=tratamientos">Tratamientos</a></li>
+            <?php elseif ($_SESSION['rol'] == 2): ?>
+                <li><a href="index.php?accion=consultar">Consultar Cita</a></li>
+                <li><a href="index.php?accion=cancelar">Cancelar Cita</a></li>
+                <li><a href="index.php?accion=tratamientos">Mis Tratamientos</a></li>
+            <?php elseif ($_SESSION['rol'] == 3): ?>
+                <li class="activa"><a href="index.php?accion=asignar">Asignar Cita</a> </li>
+                <li><a href="index.php?accion=consultar">Consultar Cita</a> </li>
+                <li><a href="index.php?accion=cancelar">Cancelar Cita</a> </li>
+                <li><a href="index.php?accion=tratamientos">Tratamientos</a> </li>
+                <li><a href="index.php?accion=consultorio">Consultorios</a> </li>
+                <li><a href="index.php?accion=medicos">Medicos</a> </li>
+            <?php endif; ?>
             <li><a href="index.php?accion=logout">Cerrar sesión</a></li>
-
         </ul>
         <div id="contenido">
-            <h2>Información General</h2>
-            <p>El Sistema de Gestión Odontológica permite administrar la información de los
-                pacientes,
-
-                tratamientos y citas a través de una interfaz web.</p>
-            <p>El sistema cuenta con las siguientes secciones:
-            <ul>
-                <li>Asignar cita</li>
-                <li>Consultar cita</li>
-                <li>Cancelar cita</li>
-                <li>Consultar tratamientos</li>
-            </ul>
-            </p>
+            <?php
+            switch ($_SESSION['rol']) {
+                case 1:
+                    echo "<h2>Bienvenido, Médico</h2>";
+                    echo "<p>Aquí puede gestionar sus consultorios y tratamientos.</p>";
+                    break;
+                case 2:
+                    echo "<h2>Bienvenido, Paciente</h2>";
+                    echo "<p>Aquí puede consultar y cancelar sus citas, y ver sus tratamientos.</p>";
+                    break;
+                case 3:
+                    echo "<h2>Bienvenido, Administrador</h2>";
+                    echo "<p>Aquí puede asignar citas, gestionar consultorios y médicos.</p>";
+                    break;
+                default:
+                    echo "<h2>Bienvenido</h2>";
+            }
+            ?>
         </div>
     </div>
 </body>

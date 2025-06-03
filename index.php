@@ -20,7 +20,9 @@ if (isset($_GET["accion"])) {
             );
             break;
     }
-    if ($_GET["accion"] == "asignar") {
+    if ($_GET["accion"] == "logout") {
+        $controlador->cerrarSesion();
+    } elseif ($_GET["accion"] == "asignar") {
         $controlador->cargarAsignar();
     } elseif ($_GET["accion"] == "consultar") {
         $controlador->verPagina('Vista/html/consultar.php');
@@ -42,12 +44,12 @@ if (isset($_GET["accion"])) {
         );
     } elseif ($_GET["accion"] == "guardarTratamiento") {
         $controlador->agregarTratamiento(
-            $_POST["PacDocumento"],
-            $_POST["TraFechaAsignado"],
-            $_POST["TraDescripcion"],
-            $_POST["TraFechaInicio"],
-            $_POST["TraFechaFin"],
-            $_POST["TraObservaciones"]
+            $_GET["PacDocumento"],
+            $_GET["TraFechaAsignado"],
+            $_GET["TraDescripcion"],
+            $_GET["TraFechaInicio"],
+            $_GET["TraFechaFin"],
+            $_GET["TraObservaciones"]
         );
     } elseif ($_GET["accion"] == "consultarCita") {
         $controlador->consultarCitas($_GET["consultarDocumento"]);

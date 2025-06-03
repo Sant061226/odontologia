@@ -46,7 +46,8 @@
                </th>
            </tr>
            <tr>
-               <th>Numero de tratamiento</th>
+               <th>Tratamiento</th>
+               <th>Asignación</th>
                <th>Descripción</th>
                <th>Fecha Inicio</th>
                <th>Fecha Fin</th>
@@ -60,6 +61,7 @@
             ?>
                <tr>
                    <td><?php echo $fila->TraNumero; ?></td>
+                   <td><?php echo $fila->TraFechaAsignado; ?></td>
                    <td><?php echo $fila->TraDescripcion; ?></td>
                    <td><?php echo $fila->TraFechaInicio; ?></td>
                    <td><?php echo $fila->TraFechaFin; ?></td>

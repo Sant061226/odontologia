@@ -1,18 +1,3 @@
-function insertarPaciente() {
-  queryString = $("#agregarPaciente").serialize();
-  url = "index.php?accion=ingresarPaciente&" + queryString;
-  $("#paciente").load(url);
-  $("#frmPaciente").dialog("close");
-}
-function insertarTratamiento() {
-  queryString = $("#agregarTratamiento").serialize();
-  url = "index.php?accion=guardarTratamiento&" + queryString;
-  $("#paciente").load(url);
-  $("#frmTratamiento").dialog("close");
-}
-function cancelar() {
-  $(this).dialog("close");
-}
 $(document).ready(function () {
   $("#frmPaciente").dialog({
     autoOpen: false,
@@ -71,6 +56,13 @@ function insertarPaciente() {
   $("#paciente").load(url);
   alert(queryString);
   $("#frmPaciente").dialog("close");
+}
+function insertarTratamiento() {
+  queryString = $("#agregarTratamiento").serialize();
+  url ="index.php?accion=guardarTratamiento&" + queryString;
+  $("#paciente").load(url);
+  alert(queryString);
+  $("#frmTratamiento").dialog("close");
 }
 function cancelar() {
   $(this).dialog("close");
@@ -203,7 +195,7 @@ $(document).ready(function () {
           "index.php?accion=EditarTratamientos",
           queryString,
           function (data) {
-            $("#paciente").html(data);
+            $("#paciente").load(url);
           }
         );
         $("#frmEditarTratamiento").dialog("close");
@@ -223,10 +215,11 @@ function confirmarEditarTrat(numero, docPaciente) {
 
   $("#editTraNumero").val(numero);
   $("#editPacDocumento").val(docPaciente);
-  $("#editTraDescripcion").val(fila.find("td").eq(1).text());
-  $("#editTraFechaInicio").val(fila.find("td").eq(2).text());
-  $("#editTraFechaFin").val(fila.find("td").eq(3).text());
-  $("#editTraObservaciones").val(fila.find("td").eq(4).text());
+  $("#editTraFechaAsinado").val(fila.find("td").eq(1).text());
+  $("#editTraDescripcion").val(fila.find("td").eq(2).text());
+  $("#editTraFechaInicio").val(fila.find("td").eq(3).text());
+  $("#editTraFechaFin").val(fila.find("td").eq(4).text());
+  $("#editTraObservaciones").val(fila.find("td").eq(5).text());
   $("#frmEditarTratamiento").dialog("open");
 }
 $(document).ready(function () {
