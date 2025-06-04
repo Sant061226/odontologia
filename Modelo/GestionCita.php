@@ -176,4 +176,29 @@ CitFecha = '$fecha'"
         $row = $result->fetch_object();
         return $row->total > 0;
     }
+    public function consultarCitasPorMedico($doc)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT * FROM citas "
+            . "WHERE CitMedico = '$doc' "
+            . " AND CitEstado = 'Solicitada' ";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $conexion->cerrar();
+        return $result;
+    }
+    public function consultarCitasPorPaciente($doc)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT * FROM citas "
+            . "WHERE CitPaciente = '$doc' "
+            . " AND CitEstado = 'Solicitada' ";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $conexion->cerrar();
+        return $result;
+    }
+   
 }

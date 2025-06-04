@@ -53,8 +53,14 @@ if (isset($_GET["accion"])) {
         );
     } elseif ($_GET["accion"] == "consultarCita") {
         $controlador->consultarCitas($_GET["consultarDocumento"]);
+    } elseif ($_GET["accion"] == "consultarCitaMedico") {
+        $controlador->consultarCitasMedico($_SESSION['usuario_id']);
+    } elseif ($_GET["accion"] == "consultarCitaPaciente") {
+        $controlador->consultarCitasPaciente($_SESSION['usuario_id']);
     } elseif ($_GET["accion"] == "cancelarCita") {
         $controlador->cancelarCitas($_GET["cancelarDocumento"]);
+    } elseif ($_GET["accion"] == "cancelarCitaPaciente") {
+        $controlador->cancelarCitasPacientes($_SESSION['usuario_id']);
     } elseif ($_GET["accion"] == "cancelarTratamiento") {
         $controlador->cancelarTratamiento($_GET["cancelarDocumento"]);
     } elseif ($_GET["accion"] == "ConsultarPaciente") {
@@ -78,6 +84,8 @@ if (isset($_GET["accion"])) {
         $controlador->confirmarCancelarTratamiento($_GET["numero"]);
     } elseif ($_GET["accion"] == "ConsultarTratamientos") {
         $controlador->consultarTratamiento($_GET["documento"]);
+    } elseif ($_GET["accion"] == "ConsultarTratamientosPaciente") {
+        $controlador->consultarTratamiento($_SESSION['usuario_id']);
     } elseif ($_GET["accion"] == "EditarTratamientos") {
         $controlador->editarTratamiento(
             $_POST["TraNumero"],

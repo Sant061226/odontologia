@@ -40,6 +40,12 @@ function consultarTratamiento() {
     $("#asignarDocumento").val();
   $("#paciente").load(url);
 }
+function consultarTratamientoPaciente() {
+  var url =
+    "index.php?accion=ConsultarTratamientosPaciente&documento=" +
+    $("#asignarDocumento").val();
+  $("#paciente").load(url);
+}
 function mostrarFormulario() {
   documento = "" + $("#asignarDocumento").val();
   $("#PacDocumento").attr("value", documento);
@@ -70,7 +76,7 @@ function cancelar() {
 function cargarHoras() {
   if ($("#medico").val() == -1 || $("#fecha").val() == "") {
     $("#hora").html(
-      "<option value='-1' selected='selected'>--Selecione la hora </option>"
+      "<option value='-1' selected='selected'>--Seleccione la hora </option>"
     );
   } else {
     queryString =
@@ -105,6 +111,16 @@ function consultarCita() {
     $("#consultarDocumento").val();
   $("#paciente2").load(url);
 }
+function consultarCitaMedico() {
+  $.get("index.php?accion=consultarCitaMedico", function(data) {
+    $("#paciente2").html(data);
+  });
+}
+function consultarCitaPaciente() {
+  $.get("index.php?accion=consultarCitaPaciente", function(data) {
+    $("#paciente2").html(data);
+  });
+}
 function consultarTratamientodisponible() {
   url =
     "index.php?accion=ConsultarTratamientos&consultarDocumento=" +
@@ -116,6 +132,16 @@ function cancelarCita() {
     "index.php?accion=cancelarCita&cancelarDocumento=" +
     $("#cancelarDocumento").val();
   $("#paciente3").load(url);
+}
+function cancelarCitaPaciente() {
+  $.get("index.php?accion=cancelarCitaPaciente&cancelarDocumento", function(data) {
+    $("#paciente3").html(data);
+  });
+}
+function cancelarCitaMedico() {
+  $.get("index.php?accion=cancelarCitaPaciente&cancelarDocumento", function(data) {
+    $("#paciente3").html(data);
+  });
 }
 function confirmarCancelar(numero) {
   if (confirm("Esta seguro de cancelar la cita " + numero)) {

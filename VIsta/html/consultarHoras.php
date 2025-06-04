@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <option value="-1" selected="selected">---Seleccione la hora ---</option>
+    <option value="-1" selected="selected">--Seleccione la hora</option>
     <?php
     while ($fila = $result->fetch_object()) {
     ?>

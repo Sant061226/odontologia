@@ -81,7 +81,25 @@ class Controlador
         $result = $gestorCita->consultarCitasPorDocumento($doc);
         require_once 'Vista/html/consultarCitas.php';
     }
+    public function consultarCitasMedico($doc)
+    {
+        $gestorCita = new GestorCita();
+        $result = $gestorCita->consultarCitasPorMedico($doc);
+        require_once 'Vista/html/consultarCitas.php';
+    }
+    public function consultarCitasPaciente($doc)
+    {
+        $gestorCita = new GestorCita();
+        $result = $gestorCita->consultarCitasPorPaciente($doc);
+        require_once 'Vista/html/consultarCitas.php';
+    }
     public function cancelarCitas($doc)
+    {
+        $gestorCita = new GestorCita();
+        $result = $gestorCita->consultarCitasPorDocumento($doc);
+        require_once 'Vista/html/cancelarCitas.php';
+    }
+    public function cancelarCitasPacientes($doc)
     {
         $gestorCita = new GestorCita();
         $result = $gestorCita->consultarCitasPorDocumento($doc);
@@ -100,6 +118,13 @@ class Controlador
         require_once 'Vista/html/consultarPaciente.php';
     }
     public function consultarTratamiento($doc)
+    {
+        $tratamiento = new GestorTratamientos();
+        $result = $tratamiento->consultarTratamiento($doc);
+        $resultado = $tratamiento->consultarTratamientosPorDocumento($doc);
+        require_once 'Vista/html/consultarTratamientos.php';
+    }
+    public function consultarTratamientoPaciente($doc)
     {
         $tratamiento = new GestorTratamientos();
         $result = $tratamiento->consultarTratamiento($doc);

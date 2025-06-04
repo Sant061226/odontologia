@@ -22,8 +22,6 @@
             <?php if ($_SESSION['rol'] == 1): ?>
                 <li class="activa"><a href="index.php?accion=asignar">Asignar Cita</a> </li>
                 <li><a href="index.php?accion=consultar">Consultar Cita</a></li>
-                <li><a href="index.php?accion=cancelar">Cancelar Cita</a></li>
-                <li><a href="index.php?accion=consultorio">Consultorios</a></li>
                 <li><a href="index.php?accion=tratamientos">Tratamientos</a></li>
             <?php elseif ($_SESSION['rol'] == 2): ?>
                 <li><a href="index.php?accion=consultar">Consultar Cita</a></li>
@@ -43,7 +41,6 @@
         <div id="contenido" class="consultorio-flex" >
             <div class="consultorio-main">
                 <h2>Consultorios</h2>
-                <P> Modificar Consultorio </P>
                 <?php if (isset($consultorioEditar) && $consultorioEditar): ?>
                     <form action="index.php" method="get" style="margin-bottom:20px;">
 
@@ -88,13 +85,11 @@
                     }
                 ?>
             </div>    
-             <!-- Botón para mostrar el formulario -->
             <div class="lado-derecho">
-                <button id="btnAgregarConsultorio" type="button" style="margin-bottom:15px;">Agregar consultorio</button>
-                <!-- Panel derecho con formulario -->
+                <button id="btnAgregarConsultorio" type="button" style="margin-bottom:15px;">Agregar 
+                </button>
                 <div id="panel-derecho-consultorio">
                     
-                    <!-- Formulario oculto para agregar consultorio -->
                     <form id="formAgregarConsultorio" action="index.php" method="get" style="display:none; margin-bottom:20px;">
                         <input type="hidden" name="accion" value="agregarConsultorio">
                         <label>Numero del consultorio:</label>
@@ -119,9 +114,7 @@
                         <button type="button" onclick="document.getElementById('formAgregarConsultorio').style.display='none';document.getElementById('btnAgregarConsultorio').style.display='inline';">Cancelar</button>
                     </form>
                 </div>
-
             </div>
-            
         </div>
     </div>
 </body>
