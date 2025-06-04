@@ -6,7 +6,7 @@ function insertarPaciente() {
 }
 function insertarTratamiento() {
   queryString = $("#agregarTratamiento").serialize();
-  url = "index.php?accion=guardarTratamiento&" + queryString;
+  url = "index.php?accion=guardarTratamiento" + queryString;
   $("#paciente").load(url);
   $("#frmTratamiento").dialog("close");
 }
@@ -71,6 +71,12 @@ function insertarPaciente() {
   $("#paciente").load(url);
   alert(queryString);
   $("#frmPaciente").dialog("close");
+}
+function insertarTratamiento() {
+  queryString = $("#agregarTratamiento").serialize();
+  url = "index.php?accion=guardarTratamiento" + queryString;
+  $("#paciente").load(url);
+  $("#frmTratamiento").dialog("close");
 }
 function cancelar() {
   $(this).dialog("close");
