@@ -2,8 +2,15 @@
 <html>
 
 <head>
-    <title>Sistema de Gestión Odontológica</title>
+    <title>Asignar Cita</title>
     <link rel="stylesheet" type="text/css" href="Vista/css/estilos.css">
+    <link href="Vista/jquery/jquery-ui-1.14.1/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="Vista/jquery/jquery.js"></script>
+    <script src="Vista/jquery/jquery-ui-1.14.1/jquery-ui.js" type="text/javascript"></script>
+    <script src="Vista/js/script.js" type="text/javascript"></script>
+    <script>
+    </script>
 </head>
 
 <body>
@@ -33,8 +40,29 @@
             <li><a href="index.php?accion=logout">Cerrar sesión</a></li>
         </ul>
         <div id="contenido">
-            <h2>Título de página</h2>
-            <p>Contenido de la página</p>
+            <h2>Pacientes Registrados</h2>
+            <table>
+                <tr>
+                    <th>Identificación</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Fecha Nacimiento</th>
+                    <th>Sexo</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+                <?php while ($paciente = $result->fetch_object()): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($paciente->PacIdentificacion); ?></td>
+                        <td><?php echo htmlspecialchars($paciente->PacNombres); ?></td>
+                        <td><?php echo htmlspecialchars($paciente->PacApellidos); ?></td>
+                        <td><?php echo htmlspecialchars($paciente->PacFechaNacimiento); ?></td>
+                        <td><?php echo htmlspecialchars($paciente->PacSexo); ?></td>
+                        <td>Editar</td>
+                        <td>Eliminar</td>
+                    </tr>
+                <?php endwhile; ?>
+            </table>
         </div>
     </div>
 </body>

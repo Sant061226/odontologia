@@ -47,7 +47,6 @@
                </th>
            </tr>
            <tr>
-               <th>Tratamiento</th>
                <th>Asignación</th>
                <th>Descripción</th>
                <th>Fecha Inicio</th>
@@ -61,7 +60,6 @@
             while ($fila = $resultado->fetch_object()) {
             ?>
                <tr>
-                   <td><?php echo $fila->TraNumero; ?></td>
                    <td><?php echo $fila->TraFechaAsignado; ?></td>
                    <td><?php echo $fila->TraDescripcion; ?></td>
                    <td><?php echo $fila->TraFechaInicio; ?></td>
@@ -76,13 +74,13 @@
             }
             ?>
        </table>
-       <input type="button" name="agregarTratamiento" id="agregarTratamiento" value="Agregar Tratamiento" onclick="mostrarFormularioTrat()">
+       <input type="button" name="agregarTratamiento" id="agregarTratamiento" value="Agregar" onclick="mostrarFormularioTrat()">
 
    <?php
     } else {
     ?>
        <p>El paciente no tiene tratamientos registrados.</p>
-       <input type="button" name="agregarTratamiento" id="agregarTratamiento" value="Ingresar Tratamiento" onclick="mostrarFormularioTrat()">
+       <input type="button" name="agregarTratamiento" id="agregarTratamiento" value="Ingresar" onclick="mostrarFormularioTrat()">
    <?php
     }
     ?>
@@ -160,18 +158,18 @@
             }
             ?>
        </table>
-       <input type="button" name="agregarTratamiento" id="agregarTratamiento" value="Agregar Tratamiento" onclick="mostrarFormularioTrat()">
+       <input type="button" name="agregarTratamiento" id="agregarTratamiento" value="Agregar" onclick="mostrarFormularioTrat()">
 
    <?php
     } else {
     ?>
        <p>El paciente no tiene tratamientos registrados.</p>
-       <input type="button" name="agregarTratamiento" id="agregarTratamiento" value="Ingresar Tratamiento" onclick="mostrarFormularioTrat()">
+       <input type="button" name="agregarTratamiento" id="agregarTratamiento" value="Ingresar" onclick="mostrarFormularioTrat()">
    <?php
     }
     ?>
 <?php elseif ($_SESSION['rol'] == 2): ?>
-     <?php
+    <?php
     if ($result->num_rows > 0) {
         echo "<!--EXISTE-->";
     ?>

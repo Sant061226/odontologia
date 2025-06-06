@@ -74,6 +74,16 @@ as consultorios ,citas "
         $conexion->cerrar();
         return $filasAfectadas;
     }
+    public function consultarPacientes()
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT * FROM pacientes";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $conexion->cerrar();
+        return $result;
+    }
     public function consultarMedicos()
     {
         $conexion = new Conexion();
@@ -200,5 +210,41 @@ CitFecha = '$fecha'"
         $conexion->cerrar();
         return $result;
     }
-   
+    public function insertarMedico($doc, $nom, $ape, $contr)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $hash = password_hash($contr, PASSWORD_DEFAULT);
+        echo "<script>alert($ape);</script>";
+        $sql = "INSERT INTO medicos (MedIdentificacion, MedNombres, MedApellidos, MedContrasena) VALUES ('$doc', '$nom', '$ape', '$hash')";
+        $conexion->consulta($sql);
+        $conexion->cerrar();
+    }
+    public function consultarMedicoPorId($id)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT * FROM medicos WHERE MedIdentificacion = '$id'";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $conexion->cerrar();
+        return $result->fetch_object();
+    }
+    public function actualizarMedico($doc, $nom, $ape, $contr)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $hash = password_hash($contr, PASSWORD_DEFAULT);
+        $sql = "UPDATE medicos SET MedNombres = '$nom', MedApellidos = '$ape', MedContrasena = '$hash' WHERE MedIdentificacion = '$doc'";
+        $conexion->consulta($sql);
+        $conexion->cerrar();
+    }
+    public function eliminarMedico($id)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "DELETE FROM medicos WHERE MedIdentificacion = '$id'";
+        $conexion->consulta($sql);
+        $conexion->cerrar();
+    }
 }

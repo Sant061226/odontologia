@@ -22,6 +22,30 @@ $(document).ready(function () {
     },
   });
 });
+$(document).ready(function () {
+  $("#frminsertarMedico").dialog({
+    autoOpen: false,
+    height: 310,
+    width: 400,
+    modal: true,
+    buttons: {
+      Insertar: insertarMedico,
+      Cancelar: cancelar,
+    },
+  });
+});
+$(document).ready(function () {
+  $("#frmEditarMedico").dialog({
+    autoOpen: false,
+    height: 310,
+    width: 400,
+    modal: true,
+    buttons: {
+      Insertar: editarMedico,
+      Cancelar: cancelar,
+    },
+  });
+});
 function consultarPaciente() {
   var url =
     "index.php?accion=ConsultarPaciente&documento=" +
@@ -56,6 +80,16 @@ function mostrarFormularioTrat() {
   $("#PacDocumento").val(documento);
   $("#frmTratamiento").dialog("open");
 }
+function mostrarFormularioMed() {
+  $("#frminsertarMedico").dialog("open");
+}
+function insertarMedico() {
+  var queryString = $("#insertarMedico").serialize();
+  $.post("index.php?accion=agregarMedico", queryString, function () {
+    $("#frminsertarMedico").dialog("close");
+    window.location.href = "index.php?accion=medicos";
+  });
+}
 function insertarPaciente() {
   queryString = $("#agregarPaciente").serialize();
   url = "index.php?accion=ingresarPaciente&" + queryString;
@@ -65,13 +99,26 @@ function insertarPaciente() {
 }
 function insertarTratamiento() {
   queryString = $("#agregarTratamiento").serialize();
-  url ="index.php?accion=guardarTratamiento&" + queryString;
+  url = "index.php?accion=guardarTratamiento&" + queryString;
   $("#paciente").load(url);
   alert(queryString);
   $("#frmTratamiento").dialog("close");
 }
 function cancelar() {
   $(this).dialog("close");
+}
+function mostrarModal(id, nombre, apellido) {
+  $("#frmEditarMedico").dialog("open");
+  document.getElementById("editMedIdentificacion").value = id;
+  document.getElementById("editMedNombres").value = nombre;
+  document.getElementById("editMedApellidos").value = apellido;
+}
+function editarMedico() {
+  var queryString = $("#EditarMedico").serialize();
+  $.post("index.php?accion=actualizarMedico", queryString, function () {
+    $("#frmEditarMedico").dialog("close");
+    window.location.href = "index.php?accion=medicos";
+  });
 }
 function cargarHoras() {
   if ($("#medico").val() == -1 || $("#fecha").val() == "") {
@@ -112,12 +159,12 @@ function consultarCita() {
   $("#paciente2").load(url);
 }
 function consultarCitaMedico() {
-  $.get("index.php?accion=consultarCitaMedico", function(data) {
+  $.get("index.php?accion=consultarCitaMedico", function (data) {
     $("#paciente2").html(data);
   });
 }
 function consultarCitaPaciente() {
-  $.get("index.php?accion=consultarCitaPaciente", function(data) {
+  $.get("index.php?accion=consultarCitaPaciente", function (data) {
     $("#paciente2").html(data);
   });
 }
@@ -134,14 +181,20 @@ function cancelarCita() {
   $("#paciente3").load(url);
 }
 function cancelarCitaPaciente() {
-  $.get("index.php?accion=cancelarCitaPaciente&cancelarDocumento", function(data) {
-    $("#paciente3").html(data);
-  });
+  $.get(
+    "index.php?accion=cancelarCitaPaciente&cancelarDocumento",
+    function (data) {
+      $("#paciente3").html(data);
+    }
+  );
 }
 function cancelarCitaMedico() {
-  $.get("index.php?accion=cancelarCitaPaciente&cancelarDocumento", function(data) {
-    $("#paciente3").html(data);
-  });
+  $.get(
+    "index.php?accion=cancelarCitaPaciente&cancelarDocumento",
+    function (data) {
+      $("#paciente3").html(data);
+    }
+  );
 }
 function confirmarCancelar(numero) {
   if (confirm("Esta seguro de cancelar la cita " + numero)) {
@@ -151,32 +204,6 @@ function confirmarCancelar(numero) {
       function (mensaje) {
         alert(mensaje);
         cancelarCita();
-      }
-    );
-  }
-  $("#cancelarConsultar").trigger("click");
-}
-function confirmarCancelarTrat(numero) {
-  if (confirm("Esta seguro de cancelar el tratamiento " + numero)) {
-    $.get(
-      "index.php",
-      { accion: "confirmarCancelarTrat", numero: numero },
-      function (mensaje) {
-        alert(mensaje);
-        var docPaciente = $("table")
-          .first()
-          .find("tr")
-          .eq(1)
-          .find("td")
-          .first()
-          .text()
-          .trim();
-        if (!docPaciente) {
-          docPaciente = $("#asignarDocumento").val();
-        }
-        $("#paciente").load(
-          "index.php?accion=ConsultarTratamientos&documento=" + docPaciente
-        );
       }
     );
   }

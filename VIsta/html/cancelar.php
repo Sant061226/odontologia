@@ -34,6 +34,7 @@
                 <li><a href="index.php?accion=cancelar">Cancelar Cita</a> </li>
                 <li><a href="index.php?accion=tratamientos">Tratamientos</a> </li>
                 <li><a href="index.php?accion=consultorio">Consultorios</a> </li>
+                <li><a href="index.php?accion=pacientes">Pacientes</a> </li>
                 <li><a href="index.php?accion=medicos">Medicos</a> </li>
             <?php endif; ?>
             <li><a href="index.php?accion=logout">Cerrar sesión</a></li>
@@ -64,10 +65,10 @@
                 </form>
             </div>
         <?php elseif ($_SESSION['rol'] == 2): ?>
-                <div id="contenido">
+            <div id="contenido">
                 <h2>Cancelar Cita</h2>
-                <p>Para canselar sus citas, por favor haga clic en el botón a continuación.</p>
-                <button type="button" onclick="cancelarCitaPaciente()">Consultar mis citas</button>
+                <p>Para cancelar sus citas, por favor haga clic en el botón a continuación.</p>
+                <button type="button" onclick="cancelarCitaPaciente()">Consultar</button>
                 <div id="paciente3"></div>
             </div>
         <?php endif; ?>

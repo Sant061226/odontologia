@@ -33,6 +33,7 @@
                 <li><a href="index.php?accion=cancelar">Cancelar Cita</a> </li>
                 <li><a href="index.php?accion=tratamientos">Tratamientos</a> </li>
                 <li><a href="index.php?accion=consultorio">Consultorios</a> </li>
+                <li><a href="index.php?accion=pacientes">Pacientes</a> </li>
                 <li><a href="index.php?accion=medicos">Medicos</a> </li>
             <?php endif; ?>
             <li><a href="index.php?accion=logout">Cerrar sesión</a></li>
@@ -209,8 +210,8 @@
             <div id="contenido">
                 <h2>Consultar Tratamientos</h2>
                 <form id="frmasignar" action="index.php?accion=consultarTratamientos" method="post">
-                    <p>Para canselar sus citas, por favor haga clic en el botón a continuación.</p>
-                    <button type="button" onclick="consultarTratamientoPaciente()" >Consultar mis citas</button>
+                    <p>Para visulizar sus tratamientos, por favor haga clic en el botón a continuación.</p>
+                    <button type="button" onclick="consultarTratamientoPaciente()">Consultar</button>
                     <div id="paciente"></div>
                 </form>
             </div>

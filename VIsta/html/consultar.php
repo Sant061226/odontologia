@@ -33,6 +33,7 @@
                 <li><a href="index.php?accion=cancelar">Cancelar Cita</a> </li>
                 <li><a href="index.php?accion=tratamientos">Tratamientos</a> </li>
                 <li><a href="index.php?accion=consultorio">Consultorios</a> </li>
+                <li><a href="index.php?accion=pacientes">Pacientes</a> </li>
                 <li><a href="index.php?accion=medicos">Medicos</a> </li>
             <?php endif; ?>
             <li><a href="index.php?accion=logout">Cerrar sesión</a></li>
@@ -55,6 +56,13 @@
                             <td colspan="2">
                                 <div id="paciente2"></div>
                             </td>
+                        </tr>
+                        <tr>
+                            <td>Descargar excel con todas las citas asignadas</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="button" name="consultarConsultar"
+                                    value="Descargar" id="consultarConsultar" onclick="consultarCita()"></td>
                         </tr>
                     </table>
                 </form>

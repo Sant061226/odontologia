@@ -34,6 +34,7 @@
                 <li><a href="index.php?accion=cancelar">Cancelar Cita</a> </li>
                 <li><a href="index.php?accion=tratamientos">Tratamientos</a> </li>
                 <li><a href="index.php?accion=consultorio">Consultorios</a> </li>
+                <li><a href="index.php?accion=pacientes">Pacientes</a> </li>
                 <li><a href="index.php?accion=medicos">Medicos</a> </li>
             <?php endif; ?>
             <li><a href="index.php?accion=logout">Cerrar sesión</a></li>

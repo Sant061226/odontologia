@@ -58,7 +58,7 @@ class Controlador
         require_once 'Vista/html/confirmarCita.php';
     }
     public function agregarTratamiento($ide, $fec, $des, $fIn, $fFin, $obs)
-   {
+    {
         $tratamiento = new Tratamientos(
             null,
             $ide,
@@ -74,6 +74,12 @@ class Controlador
         $result = $gestorTratamiento->consultarTratamiento($id);
         $resultado = $gestorTratamiento->consultarTratamientosPorId($id);
         require_once 'Vista/html/consultarTratamientos.php';
+    }
+    public function listarPacientes()
+    {
+        $gestorCita = new GestorCita();
+        $result = $gestorCita->consultarPacientes();
+        require 'Vista/html/pacientes.php';
     }
     public function consultarCitas($doc)
     {
@@ -250,5 +256,44 @@ class Controlador
         }
         $result = $gestorCita->consultarConsultorios();
         require 'Vista/html/consultorio.php';
+    }
+    public function listarMedicos()
+    {
+        $gestorCita = new GestorCita();
+        $result = $gestorCita->consultarMedicos();
+        require 'Vista/html/medicos.php';
+    }
+    public function agregarMedico($doc, $nom, $ape, $contr)
+    {
+        $gestorCita = new GestorCita();
+        $gestorCita->insertarMedico($doc, $nom, $ape, $contr);
+    }
+    public function editarMedico($id)
+    {
+        $gestorCita = new GestorCita();
+        $result = $gestorCita->consultarMedicoPorId($id);
+        require 'Vista/html/editarMedico.php';
+    }
+    public function actualizarMedico($doc, $nom, $ape, $contr)
+    {
+        $gestorCita = new GestorCita();
+        $gestorCita->actualizarMedico($doc, $nom, $ape, $contr);
+        header('Location: index.php?accion=medicos');
+        exit;
+    }
+    public function eliminarMedico($id)
+    {
+        $gestorCita = new GestorCita();
+        $gestorCita->eliminarMedico($id);
+    }
+    public function consultarMedicos()
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT * FROM medicos";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $conexion->cerrar();
+        return $result;
     }
 }

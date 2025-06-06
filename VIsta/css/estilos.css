@@ -38,6 +38,7 @@ div#contenido {
   border: black 1px solid;
   margin: 20px 20px 10px 180px;
   padding: 10px 15px;
+  min-height: 300px;
 }
 #menu li {
   border: black 1px solid;
@@ -129,6 +130,8 @@ button:hover {
 }
 table {
   width: 100%;
-  border-collapse: collapse;
   margin: 10px 0;
+  border-collapse: collapse;
+  font-size: 0.9em;
+
 }

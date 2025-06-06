@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,11 @@
     <link rel="stylesheet" type="text/css" href="Vista/css/estilos.css">
     <script src="Vista/jquery/jquery.js"></script>
     <script src="Vista/jquery/jquery-ui-1.14.1/jquery-ui.js" type="text/javascript"></script>
-    <link href="Vista/jquery/jquery-ui-1.14.1/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="Vista/jquery/jquery-ui-1.14.1/jquery-ui.min.css" rel="stylesheet" type="text/css" />
     <script src="Vista/js/script.js"></script>
-   
+
 </head>
+
 <body>
     <div id="contenedor">
         <div id="encabezado">
@@ -33,12 +35,13 @@
                 <li><a href="index.php?accion=cancelar">Cancelar Cita</a> </li>
                 <li><a href="index.php?accion=tratamientos">Tratamientos</a> </li>
                 <li><a href="index.php?accion=consultorio">Consultorios</a> </li>
+                <li><a href="index.php?accion=pacientes">Pacientes</a> </li>
                 <li><a href="index.php?accion=medicos">Medicos</a> </li>
             <?php endif; ?>
             <li><a href="index.php?accion=logout">Cerrar sesión</a></li>
         </ul>
 
-        <div id="contenido" class="consultorio-flex" >
+        <div id="contenido" class="consultorio-flex">
             <div class="consultorio-main">
                 <h2>Consultorios</h2>
                 <?php if (isset($consultorioEditar) && $consultorioEditar): ?>
@@ -47,49 +50,49 @@
                         <input type="hidden" name="accion" value="actualizarConsultorio">
 
                         <input type="hidden" name="numero" value="<?php echo htmlspecialchars($consultorioEditar->ConNumero); ?>">
-                   
+
                         <label>Editar Consultorio:</label>
                         <input type="text" name="nombre" value="<?php echo htmlspecialchars($consultorioEditar->ConNombre); ?>" required>
-                        <br> 
-                                    
+                        <br>
+
                         <div class="botones-form">
                             <button type="submit" class="btn-guardar">Guardar</button>
                             <button type="button" class="btn-cancelar" onclick="window.location.href='index.php?accion=consultorio'">Cancelar</button>
                         </div>
-                        
+
                     </form>
                 <?php endif; ?>
 
-                    <?php
-                    if (isset($mensaje)) { ?>
-                        <div style="color:<?php echo (strpos($mensaje, 'Error') === 0) ? 'red' : 'green'; ?>;font-weight:none;margin-bottom:10px;font-size:14px;font-family:poppins;">
-                            <?php echo $mensaje; ?>
-                        </div>
-                    <?php } ?>
                 <?php
-                    if ($result && $result->num_rows > 0) {
-                        echo "<table class='tabla-paciente'>";
-                        echo "<tr><th>Número</th><th>Nombre</th><th>Eliminar</th><th>Editar</th></tr>";
-                        while ($fila = $result->fetch_object()) {
-                            echo "<tr>";
-                            echo "<td>" . htmlspecialchars($fila->ConNumero) . "</td>";
-                            echo "<td>" . htmlspecialchars($fila->ConNombre) . "</td>";
-                            echo "<td><a href='index.php?accion=eliminarConsultorio&numero=" . htmlspecialchars($fila->ConNumero) . "' onclick=\"return confirm('¿Seguro que desea eliminar este consultorio?')\">Eliminar</a></td>";
+                if (isset($mensaje)) { ?>
+                    <div style="color:<?php echo (strpos($mensaje, 'Error') === 0) ? 'red' : 'green'; ?>;font-weight:none;margin-bottom:10px;font-size:14px;font-family:poppins;">
+                        <?php echo $mensaje; ?>
+                    </div>
+                <?php } ?>
+                <?php
+                if ($result && $result->num_rows > 0) {
+                    echo "<table class='tabla-paciente'>";
+                    echo "<tr><th>Número</th><th>Nombre</th><th>Eliminar</th><th>Editar</th></tr>";
+                    while ($fila = $result->fetch_object()) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($fila->ConNumero) . "</td>";
+                        echo "<td>" . htmlspecialchars($fila->ConNombre) . "</td>";
+                        echo "<td><a href='index.php?accion=eliminarConsultorio&numero=" . htmlspecialchars($fila->ConNumero) . "' onclick=\"return confirm('¿Seguro que desea eliminar este consultorio?')\">Eliminar</a></td>";
                         echo "<td><a href='index.php?accion=consultorio&editar=" . htmlspecialchars($fila->ConNumero) . "'>Editar</a></td>";
-                        
-                            echo "</tr>";   
-                        }
-                        echo "</table>";
-                    } else {
-                        echo "<p>No hay consultorios registrados.</p>";
+
+                        echo "</tr>";
                     }
+                    echo "</table>";
+                } else {
+                    echo "<p>No hay consultorios registrados.</p>";
+                }
                 ?>
-            </div>    
+            </div>
             <div class="lado-derecho">
-                <button id="btnAgregarConsultorio" type="button" style="margin-bottom:15px;">Agregar 
+                <button id="btnAgregarConsultorio" type="button" style="margin-bottom:15px;">Agregar
                 </button>
                 <div id="panel-derecho-consultorio">
-                    
+
                     <form id="formAgregarConsultorio" action="index.php" method="get" style="display:none; margin-bottom:20px;">
                         <input type="hidden" name="accion" value="agregarConsultorio">
                         <label>Numero del consultorio:</label>
@@ -107,7 +110,7 @@
                             <option value="10">10</option>
                         </select>
                         <br>
-                                              
+
                         <label>Nombre del consultorio:</label>
                         <input type="text" name="nombre" required>
                         <button type="submit">Guardar</button>
@@ -118,4 +121,5 @@
         </div>
     </div>
 </body>
+
 </html>
