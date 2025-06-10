@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function insertarPaciente() {
   queryString = $("#agregarPaciente").serialize();
   url = "index.php?accion=ingresarPaciente&" + queryString;
@@ -13,6 +14,8 @@ function insertarTratamiento() {
 function cancelar() {
   $(this).dialog("close");
 }
+=======
+>>>>>>> 59a7e28f4b14df79f4e2db1045852ab374da4948
 $(document).ready(function () {
   $("#frmPaciente").dialog({
     autoOpen: false,
@@ -74,8 +77,14 @@ function insertarPaciente() {
 }
 function insertarTratamiento() {
   queryString = $("#agregarTratamiento").serialize();
+<<<<<<< HEAD
   url = "index.php?accion=guardarTratamiento" + queryString;
   $("#paciente").load(url);
+=======
+  url ="index.php?accion=guardarTratamiento&" + queryString;
+  $("#paciente").load(url);
+  alert(queryString);
+>>>>>>> 59a7e28f4b14df79f4e2db1045852ab374da4948
   $("#frmTratamiento").dialog("close");
 }
 function cancelar() {
@@ -151,11 +160,20 @@ function confirmarCancelarTrat(numero) {
       { accion: "confirmarCancelarTrat", numero: numero },
       function (mensaje) {
         alert(mensaje);
-        var docPaciente = $("table").first().find("tr").eq(1).find("td").first().text().trim();
+        var docPaciente = $("table")
+          .first()
+          .find("tr")
+          .eq(1)
+          .find("td")
+          .first()
+          .text()
+          .trim();
         if (!docPaciente) {
           docPaciente = $("#asignarDocumento").val();
         }
-        $("#paciente").load("index.php?accion=ConsultarTratamientos&documento=" + docPaciente);
+        $("#paciente").load(
+          "index.php?accion=ConsultarTratamientos&documento=" + docPaciente
+        );
       }
     );
   }
@@ -168,11 +186,20 @@ function confirmarCancelarTrat(numero) {
       { accion: "confirmarCancelarTrat", numero: numero },
       function (mensaje) {
         alert(mensaje);
-        var docPaciente = $("table").first().find("tr").eq(1).find("td").first().text().trim();
+        var docPaciente = $("table")
+          .first()
+          .find("tr")
+          .eq(1)
+          .find("td")
+          .first()
+          .text()
+          .trim();
         if (!docPaciente) {
           docPaciente = $("#asignarDocumento").val();
         }
-        $("#paciente").load("index.php?accion=ConsultarTratamientos&documento=" + docPaciente);
+        $("#paciente").load(
+          "index.php?accion=ConsultarTratamientos&documento=" + docPaciente
+        );
       }
     );
   }
@@ -191,7 +218,7 @@ $(document).ready(function () {
           "index.php?accion=EditarTratamientos",
           queryString,
           function (data) {
-            $("#paciente").html(data);
+            $("#paciente").load(url);
           }
         );
         $("#frmEditarTratamiento").dialog("close");
@@ -211,9 +238,41 @@ function confirmarEditarTrat(numero, docPaciente) {
 
   $("#editTraNumero").val(numero);
   $("#editPacDocumento").val(docPaciente);
-  $("#editTraDescripcion").val(fila.find("td").eq(1).text());
-  $("#editTraFechaInicio").val(fila.find("td").eq(2).text());
-  $("#editTraFechaFin").val(fila.find("td").eq(3).text());
-  $("#editTraObservaciones").val(fila.find("td").eq(4).text());
+  $("#editTraFechaAsinado").val(fila.find("td").eq(1).text());
+  $("#editTraDescripcion").val(fila.find("td").eq(2).text());
+  $("#editTraFechaInicio").val(fila.find("td").eq(3).text());
+  $("#editTraFechaFin").val(fila.find("td").eq(4).text());
+  $("#editTraObservaciones").val(fila.find("td").eq(5).text());
   $("#frmEditarTratamiento").dialog("open");
 }
+$(document).ready(function () {
+  var btn = document.getElementById("btnMostrarEliminar");
+  var form = document.getElementById("formEliminar");
+  if (btn && form) {
+    btn.onclick = function () {
+      form.style.display = "inline";
+      this.style.display = "none";
+    };
+  }
+});
+$(document).ready(function () {
+  var btnAgregar = document.getElementById("btnAgregarConsultorio");
+  var formAgregar = document.getElementById("formAgregarConsultorio");
+  if (btnAgregar && formAgregar) {
+    btnAgregar.onclick = function () {
+      formAgregar.style.display = "block";
+      btnAgregar.style.display = "none";
+    };
+  }
+});
+document.getElementById("btnAgregarConsultorio").onclick = function () {
+  var form = document.getElementById("formAgregarConsultorio");
+  form.classList.add("show");
+  this.style.display = "none";
+};
+document.getElementById("btnCancelarAgregar").onclick = function () {
+  var form = document.getElementById("formAgregarConsultorio");
+  form.classList.remove("show");
+  document.getElementById("btnAgregarConsultorio").style.display =
+    "inline-block";
+};

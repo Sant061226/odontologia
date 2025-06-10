@@ -65,9 +65,10 @@ as consultorios ,citas "
         $apellidos = $paciente->obtenerApellidos();
         $fechaNacimiento = $paciente->obtenerFechaNacimiento();
         $sexo = $paciente->obtenerSexo();
-        $sql = "INSERT INTO Pacientes VALUES (
-'$identificacion','$nombres','$apellidos',"
-            . "'$fechaNacimiento','$sexo')";
+        $contrasena = $paciente->obtenerContrasena();
+        $hash = password_hash($contrasena, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO Pacientes (PacIdentificacion, PacNombres, PacApellidos, PacFechaNacimiento, PacSexo, PacContrasena)
+                VALUES ('$identificacion','$nombres','$apellidos','$fechaNacimiento','$sexo','$hash')";
         $conexion->consulta($sql);
         $filasAfectadas = $conexion->obtenerFilasAfectadas();
         $conexion->cerrar();
@@ -96,16 +97,6 @@ CitFecha = '$fecha'"
         $conexion->cerrar();
         return $result;
     }
-    public function consultarConsultorios()
-    {
-        $conexion = new Conexion();
-        $conexion->abrir();
-        $sql = "SELECT * FROM consultorios ";
-        $conexion->consulta($sql);
-        $result = $conexion->obtenerResult();
-        $conexion->cerrar();
-        return $result;
-    }
     public function cancelarCita($cita)
     {
         $conexion = new Conexion();
@@ -116,5 +107,73 @@ CitFecha = '$fecha'"
         $filasAfectadas = $conexion->obtenerFilasAfectadas();
         $conexion->cerrar();
         return $filasAfectadas;
+    }
+    public function consultarConsultorios()
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT ConNumero, ConNombre FROM consultorios";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $conexion->cerrar();
+        return $result;
+    }
+    public function tieneCitasAgendadas($conNumero)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT COUNT(*) as total FROM citas WHERE CitConsultorio = $conNumero AND CitEstado = 'Solicitada'";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $conexion->cerrar();
+        $row = $result->fetch_object();
+        return $row->total > 0;
+    }
+
+    public function eliminarConsultorio($conNumero)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "DELETE FROM consultorios WHERE ConNumero = $conNumero";
+        $conexion->consulta($sql);
+        $conexion->cerrar();
+    }
+    public function consultarConsultorioPorNumero($numero)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT * FROM consultorios WHERE ConNumero = $numero";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $conexion->cerrar();
+        return $result->fetch_object();
+    }
+
+    public function actualizarConsultorio($numero, $nombre)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "UPDATE consultorios SET ConNombre = '$nombre' WHERE ConNumero = $numero";
+        $conexion->consulta($sql);
+        $conexion->cerrar();
+    }
+    public function agregarConsultorio($numero, $nombre)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "INSERT INTO consultorios (ConNumero, ConNombre) VALUES ($numero, '$nombre')";
+        $conexion->consulta($sql);
+        $conexion->cerrar();
+    }
+    public function existeConsultorioPorNumero($numero)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT COUNT(*) as total FROM consultorios WHERE ConNumero = '$numero'";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $conexion->cerrar();
+        $row = $result->fetch_object();
+        return $row->total > 0;
     }
 }

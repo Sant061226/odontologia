@@ -36,6 +36,7 @@ if ($result->num_rows > 0) {
 }
 ?>
 
+<<<<<<< HEAD
 <?php
 if ($resultado->num_rows > 0) {
 ?>
@@ -67,6 +68,41 @@ if ($resultado->num_rows > 0) {
                 <td><a href="#" onclick="confirmarEditarTrat(<?php echo $fila->TraNumero; ?>)">Editar</a></td>
                 <td><a href="#" onclick="confirmarCancelarTrat(<?php echo $fila->TraNumero;
                                                                 ?>)">Cancelar</a></td>
+=======
+   <?php
+    if ($resultado->num_rows > 0) {
+    ?>
+       <table>
+           <tr>
+               <th>
+                   <h2>Tratamientos</h2>
+               </th>
+           </tr>
+           <tr>
+               <th>Tratamiento</th>
+               <th>Asignación</th>
+               <th>Descripción</th>
+               <th>Fecha Inicio</th>
+               <th>Fecha Fin</th>
+               <th>Observaciones</th>
+               <th>Editar</th>
+               <th>Eliminar</th>
+
+           </tr>
+           <?php
+            while ($fila = $resultado->fetch_object()) {
+            ?>
+               <tr>
+                   <td><?php echo $fila->TraNumero; ?></td>
+                   <td><?php echo $fila->TraFechaAsignado; ?></td>
+                   <td><?php echo $fila->TraDescripcion; ?></td>
+                   <td><?php echo $fila->TraFechaInicio; ?></td>
+                   <td><?php echo $fila->TraFechaFin; ?></td>
+                   <td><?php echo $fila->TraObservaciones; ?></td>
+                   <td><a href="#" onclick="confirmarEditarTrat(<?php echo $fila->TraNumero; ?>)">Editar</a></td>
+                   <td><a href="#" onclick="confirmarCancelarTrat(<?php echo $fila->TraNumero;
+                                                                    ?>)">Cancelar</a></td>
+>>>>>>> 59a7e28f4b14df79f4e2db1045852ab374da4948
 
             </tr>
         <?php
