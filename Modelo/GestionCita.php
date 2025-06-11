@@ -263,4 +263,18 @@ CitFecha = '$fecha'"
         $conexion->consulta($sql);
         $conexion->cerrar();
     }
+    public function obtenerCorreoPaciente($pacienteId)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT PacCorreo FROM pacientes WHERE PacIdentificacion = '$pacienteId'";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $correo = null;
+        if ($row = $result->fetch_assoc()) {
+            $correo = $row['PacCorreo'];
+        }
+        $conexion->cerrar();
+        return $correo;
+    }
 }

@@ -58,11 +58,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Descargar excel con todas las citas asignadas</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><input type="button" name="consultarConsultar"
-                                    value="Descargar" id="consultarConsultar" onclick="consultarCita()"></td>
+                            <td colspan="2"><a href="#" onclick="confirmarDescarga(event)" class="btn-excel">Descargar excel con todas las citas asignadas</a></td>
                         </tr>
                     </table>
                 </form>
@@ -87,6 +83,7 @@
             </div>
         <?php endif; ?>
     </div>
+    
 </body>
 
 </html>

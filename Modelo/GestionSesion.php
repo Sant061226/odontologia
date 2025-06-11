@@ -8,7 +8,6 @@ class GestorSesion
         $identificacion = $sesion->obtenerIdentificacion();
         $contrasena = $sesion->obtenerContrasena();
         $rol = $sesion->obtenerRol();
-
         $usuario = false;
         if ($rol == 1) {
             $sql = "SELECT * FROM medicos WHERE MedIdentificacion = '$identificacion'";

@@ -146,7 +146,7 @@ function insertarTratamiento() {
   queryString = $("#agregarTratamiento").serialize();
   url = "index.php?accion=guardarTratamiento" + queryString;
   $("#paciente").load(url);
-  url ="index.php?accion=guardarTratamiento&" + queryString;
+  url = "index.php?accion=guardarTratamiento&" + queryString;
   $("#paciente").load(url);
   alert(queryString);
   $("#frmTratamiento").dialog("close");
@@ -354,7 +354,7 @@ document.getElementById("btnCancelarAgregar").onclick = function () {
     "inline-block";
 };
 $(document).ready(function () {
-  $("#frmEditarPaciente").dialog({
+  $("#frmEdPaciente").dialog({
     autoOpen: false,
     height: 350,
     width: 400,
@@ -363,29 +363,42 @@ $(document).ready(function () {
       Guardar: function () {
         editarPaciente();
       },
-      Cancelar: cancelar,
+      Cancelar: function () {
+        $(this).dialog("close");
+      },
     },
   });
 });
-function mostrarModalEditarPaciente(id, nombres, apellidos, fechaNacimiento, sexo) {
+
+function mostrarModalPac(id, nombres, apellidos, fechaNacimiento, sexo) {
   $("#editPacDocumento").val(id);
   $("#editPacNombres").val(nombres);
   $("#editPacApellidos").val(apellidos);
   $("#editPacFechaNacimiento").val(fechaNacimiento);
   $("#editPacSexo").val(sexo);
-  $("#frmEditarPaciente").dialog("open");
+  $("#frmEdPaciente").dialog("open");
 }
+
 function editarPaciente() {
-  var queryString = $("#editarPaciente").serialize();
-  $.post("index.php?accion=actualizarPaciente", queryString, function () {
+  var datos = $("#editarPaciente").serialize();
+  $.post("index.php?accion=actualizarPaciente", datos, function (respuesta) {
+    $("#frmEdPaciente").dialog("close");
     location.reload();
   });
-  $("#frmEditarPaciente").dialog("close");
 }
 function eliminarPaciente(id) {
-    if (confirm("¿Está seguro que desea eliminar este paciente?")) {
-        $.get("index.php?accion=eliminarPaciente&id=" + encodeURIComponent(id), function () {
-            location.reload();
-        });
-    }
+  if (confirm("¿Está seguro que desea eliminar este paciente?")) {
+    $.get(
+      "index.php?accion=eliminarPaciente&id=" + encodeURIComponent(id),
+      function () {
+        location.reload();
+      }
+    );
+  }
+}
+function confirmarDescarga(event) {
+  event.preventDefault();
+  if (confirm("¿Desea descargar el archivo Excel con todas las citas?")) {
+    window.location.href = "index.php?accion=descargarExcelCitas";
+  }
 }

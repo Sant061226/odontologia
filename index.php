@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require_once 'Controlador/Controlador.php';
 require_once 'Modelo/GestionCita.php';
@@ -9,6 +10,8 @@ require_once 'Modelo/Tratamientos.php';
 require_once 'Modelo/Conexion.php';
 require_once 'Modelo/GestionSesion.php';
 require_once 'Modelo/Sesion.php';
+require_once 'Modelo/ExportarExcel.php';
+
 $controlador = new Controlador();
 if (isset($_GET["accion"])) {
     switch ($_GET["accion"]) {
@@ -146,6 +149,17 @@ if (isset($_GET["accion"])) {
         exit;
     } elseif ($_GET["accion"] == "eliminarPaciente" && isset($_GET["id"])) {
         $controlador->eliminarPaciente($_GET["id"]);
+        exit;
+    } elseif ($_GET["accion"] == "descargarExcelCitas") {
+        require_once 'Modelo/ExportarExcel.php';
+        exportarCitasExcel();
+    } elseif ($_GET["accion"] == "enviarCorreoCita" && $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['CitNumero']) && isset($_POST['correo_destino'])) {
+        require_once 'Modelo/EnviarCorreoCita.php';
+        if (enviarCorreoCita($_POST['CitNumero'], $_POST['correo_destino'])) {
+            $controlador->verPagina('Vista/html/inicio.php');
+        } else {
+            echo "<script>alert('Error al enviar el correo'); window.location.reload();</script>";
+        }
         exit;
     }
 } else {

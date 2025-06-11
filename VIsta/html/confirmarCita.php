@@ -48,6 +48,10 @@
                     <td><?php echo $fila->PacNombres . " " . $fila->PacApellidos; ?></td>
                 </tr>
                 <tr>
+                    <td>Correo</td>
+                    <td><?php echo $fila->PacCorreo ?></td>
+                </tr>
+                <tr>
                     <th colspan="2">Datos del Médico</th>
                 </tr>
                 <tr>
@@ -85,14 +89,16 @@
                     <td>Observaciones</td>
                     <td><?php echo $fila->CitObservaciones; ?></td>
                 </tr>
-                <tr>
-                    <td>Descargar PDF de la cita</td>
-                    <td colspan="2"><input type="button" name="consultarConsultar"
-                            value="Descargar" id="consultarConsultar" onclick="consultarCita()"></td>
-
-                </tr>
-
             </table>
+            <form action="Modelo/DescargarCitaPDF.php" method="post" target="_blank" style="margin-top:20px;"> <input type="hidden" name="CitNumero" value="<?php echo $fila->CitNumero; ?>">
+                <button type="submit">Descargar PDF</button>
+            </form>
+            <form action="index.php?accion=enviarCorreoCita" method="post" style="margin-top:20px;">
+                <input type="hidden" name="CitNumero" value="<?php echo $fila->CitNumero; ?>">
+                <label for="correo_destino">Correo destino:</label>
+                <input type="email" name="correo_destino" id="correo_destino" required>
+                <button type="submit">Enviar Correo</button>
+            </form>
         </div>
     </div>
 </body>

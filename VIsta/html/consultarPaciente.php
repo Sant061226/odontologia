@@ -17,6 +17,8 @@
                 <th>Nombre Completo</th>
                 <th>Sexo</th>
                 <th>Fecha Nacimiento</th>
+                <th>Correo</th>
+
             </tr>
             <?php
             while ($fila = $result->fetch_object()) {
@@ -26,6 +28,8 @@
                     <td><?php echo $fila->PacNombres . " " . $fila->PacApellidos; ?></td>
                     <td><?php echo $fila->PacSexo; ?></td>
                     <td><?php echo $fila->PacFechaNacimiento; ?></td>
+                    <td><?php echo $fila->PacCorreo; ?></td>
+
                 </tr>
             <?php
             }
@@ -40,4 +44,5 @@
     }
     ?>
 </body>
+
 </html>

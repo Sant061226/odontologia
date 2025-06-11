@@ -116,6 +116,8 @@
                         </td>
                     </tr>
                     <tr>
+                    </tr>
+                    <tr>
                         <td colspan="2">
                             <input type="submit" name="asignarEnviar" value="Enviar"
                                 id="asignarEnviar" onmousedown="enviar()" disabled>
@@ -184,6 +186,7 @@
                 </form>
             </div>
         </div>
+    </div>
 </body>
 
 </html>

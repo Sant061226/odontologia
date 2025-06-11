@@ -75,6 +75,30 @@ class Controlador
         $resultado = $gestorTratamiento->consultarTratamientosPorId($id);
         require_once 'Vista/html/consultarTratamientos.php';
     }
+    public function guardarCita()
+    {
+        $gestorCita = new GestorCita();
+
+        // Guardar la cita normalmente
+        $citaId = $gestorCita->agregarCita(
+            $_POST['asignarDocumento'],
+            $_POST['medico'],
+            $_POST['consultorio'],
+            $_POST['fecha'],
+            $_POST['hora']
+        );
+
+        // Obtener correo del paciente
+        $correo = $gestorCita->obtenerCorreoPaciente($_POST['asignarDocumento']);
+
+        // Llamar al envío de correo
+        require_once 'Modelo/EnviarCorreoCita.php';
+        enviarCorreoCita($citaId, $correo);
+
+        // Redirigir o mostrar mensaje
+        header('Location: index.php?accion=consultarCitas&msg=ok');
+        exit;
+    }
     public function listarPacientes()
     {
         $gestorCita = new GestorCita();
