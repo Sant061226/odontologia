@@ -74,6 +74,16 @@ as consultorios ,citas "
         $conexion->cerrar();
         return $filasAfectadas;
     }
+    public function consultarPacientes()
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT * FROM pacientes";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $conexion->cerrar();
+        return $result;
+    }
     public function consultarMedicos()
     {
         $conexion = new Conexion();
@@ -175,5 +185,82 @@ CitFecha = '$fecha'"
         $conexion->cerrar();
         $row = $result->fetch_object();
         return $row->total > 0;
+    }
+    public function consultarCitasPorMedico($doc)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT * FROM citas "
+            . "WHERE CitMedico = '$doc' "
+            . " AND CitEstado = 'Solicitada' ";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $conexion->cerrar();
+        return $result;
+    }
+    public function consultarCitasPorPaciente($doc)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT * FROM citas "
+            . "WHERE CitPaciente = '$doc' "
+            . " AND CitEstado = 'Solicitada' ";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $conexion->cerrar();
+        return $result;
+    }
+    public function insertarMedico($doc, $nom, $ape, $contr)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $hash = password_hash($contr, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO medicos (MedIdentificacion, MedNombres, MedApellidos, MedContrasena) VALUES ('$doc', '$nom', '$ape', '$hash')";
+        $resultado = $conexion->consulta($sql);
+        $conexion->cerrar();
+        return $resultado;
+    }
+    public function consultarMedicoPorId($id)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT * FROM medicos WHERE MedIdentificacion = '$id'";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $conexion->cerrar();
+        return $result->fetch_object();
+    }
+    public function actualizarMedico($doc, $nom, $ape, $contr)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $hash = password_hash($contr, PASSWORD_DEFAULT);
+        $sql = "UPDATE medicos SET MedNombres = '$nom', MedApellidos = '$ape', MedContrasena = '$hash' WHERE MedIdentificacion = '$doc'";
+        $conexion->consulta($sql);
+        $conexion->cerrar();
+    }
+    public function eliminarMedico($id)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "DELETE FROM medicos WHERE MedIdentificacion = '$id'";
+        $conexion->consulta($sql);
+        $conexion->cerrar();
+    }
+    public function actualizarPaciente($doc, $nom, $ape, $fec, $sex)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "UPDATE Pacientes SET PacNombres='$nom', PacApellidos='$ape', PacFechaNacimiento='$fec', PacSexo='$sex' WHERE PacIdentificacion='$doc'";
+        $conexion->consulta($sql);
+        $conexion->cerrar();
+    }
+    public function eliminarPaciente($id)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "DELETE FROM Pacientes WHERE PacIdentificacion = '$id'";
+        $conexion->consulta($sql);
+        $conexion->cerrar();
     }
 }

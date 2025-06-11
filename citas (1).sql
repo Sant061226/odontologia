@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2025 a las 19:33:31
+-- Tiempo de generación: 11-06-2025 a las 03:39:07
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -137,6 +137,7 @@ CREATE TABLE `medicos` (
 INSERT INTO `medicos` (`MedIdentificacion`, `MedNombres`, `MedApellidos`, `MedContrasena`, `Rol`) VALUES
 ('12345', 'Pepito', 'Pérez', '$2y$10$bprMH2kUvHW8TCpHFSxF9.RqZBtgaY9pp', 1),
 ('1313', 'Steven', 'Perez', '$2y$10$5.GmLfBOgupLAYhmYoa37OyYEoMpMDAo4', 1),
+('3', 'Paola', 'Lozano', '$2y$10$DzssNDl02cx3.JYJ2wLIKOoanDc1BBBxZ', 1),
 ('67890', 'Pepita', 'Mendieta', '$2y$10$/l4iRYdcU/c7qJ0WEotwhOcPDF8B2yaQm', 1);
 
 -- --------------------------------------------------------
@@ -152,6 +153,7 @@ CREATE TABLE `pacientes` (
   `PacFechaNacimiento` date NOT NULL,
   `PacSexo` enum('M','F') NOT NULL,
   `PacContrasena` varchar(40) NOT NULL,
+  `Pacorreo` varchar(40) NOT NULL,
   `Rol` int(1) NOT NULL DEFAULT 2
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -159,18 +161,16 @@ CREATE TABLE `pacientes` (
 -- Volcado de datos para la tabla `pacientes`
 --
 
-INSERT INTO `pacientes` (`PacIdentificacion`, `PacNombres`, `PacApellidos`, `PacFechaNacimiento`, `PacSexo`, `PacContrasena`, `Rol`) VALUES
-('', '', '', '0000-00-00', '', '$2y$10$RrQwNe4Gx6GpvcDOsg.mJ.Ky6z/nwTPDP', 2),
-('0', 'deded', 'rfrft', '2015-04-12', 'F', '$2y$10$kijFFg67lRihxJMY4yYmFOB9us2r4OO1c', 2),
-('01', 'edrftg', 'ikujyt', '2025-04-27', 'M', '$2y$10$wvvzuOEhhyta6JKhzAXJ4OVFLZPin55tF', 2),
-('1', 'th', 'j', '0000-00-00', 'M', '$2y$10$MPdr372sP6Z7JL7sKS1UhOTrLPaTPGlle', 2),
-('12', 'dad', 'dadd', '2025-04-27', 'F', '$2y$10$QwA2RCc4N6nmOq8qdL9iau2qMfzU20QZc', 2),
-('1212', 'Pepe', 'Rojas', '2005-02-23', 'M', '$2y$10$.N0ngjyIewT9Zfp.eJBbluRdne0F8/h5K', 2),
-('123', 'Joan', 'G', '2005-10-25', 'M', '$2y$10$ai0jrzrn.iQIhcTt2BSg9.i83/zw5AAGz', 2),
-('124', 'Joas', 'Ldea', '2025-05-04', 'M', '$2y$10$l68bRvNadvUfRV6EuAE3Aev4HrHZH514n', 2),
-('13', 'sdfgh', 'mkl', '1975-11-11', 'M', '$2y$10$qOHQ/uM/geukyLpoLNu.IO3v/QQx2Ccmc', 2),
-('3', 'def', 'grgr', '2025-04-28', 'M', '$2y$10$o4vL2BvLe5Fn8GOmb5B4BuCJWXza.OUkB', 2),
-('7', 'Hola', 'Chao', '2025-04-30', 'M', '$2y$10$ruF8lfLxt8.O1GAC.M9xrOEkXk8Kx06P4', 2);
+INSERT INTO `pacientes` (`PacIdentificacion`, `PacNombres`, `PacApellidos`, `PacFechaNacimiento`, `PacSexo`, `PacContrasena`, `Pacorreo`, `Rol`) VALUES
+('', '', '', '0000-00-00', 'M', '$2y$10$RrQwNe4Gx6GpvcDOsg.mJ.Ky6z/nwTPDP', 'saa.arevalo@gmail.com', 2),
+('0', 'deded', 'rfrft', '2015-04-12', 'F', '$2y$10$kijFFg67lRihxJMY4yYmFOB9us2r4OO1c', 'saa.arevalo@gmail.com', 2),
+('01', 'edrftg', 'ikujyt', '2025-04-27', 'M', '$2y$10$wvvzuOEhhyta6JKhzAXJ4OVFLZPin55tF', 'saa.arevalo@gmail.com', 2),
+('1', 'th', 'j', '0000-00-00', 'M', '$2y$10$MPdr372sP6Z7JL7sKS1UhOTrLPaTPGlle', 'saa.arevalo@gmail.com', 2),
+('12', 'dad', 'dadd', '2025-04-27', 'F', '$2y$10$QwA2RCc4N6nmOq8qdL9iau2qMfzU20QZc', 'saa.arevalo@gmail.com', 2),
+('1212', 'Pepe', 'Rojas', '2005-02-23', 'M', '$2y$10$.N0ngjyIewT9Zfp.eJBbluRdne0F8/h5K', 'saa.arevalo@gmail.com', 2),
+('123', 'Joan', 'G', '2005-10-25', 'M', '$2y$10$ai0jrzrn.iQIhcTt2BSg9.i83/zw5AAGz', 'saa.arevalo@gmail.com', 2),
+('45', 'Luis ', 'Tovar', '1995-08-20', 'M', '$2y$10$jo72kyYsS5zU9rnw8YEIrebEi3wUueESm', 'saa.arevalo@gmail.com', 2),
+('7', 'Hola', 'Chao', '2025-04-30', 'M', '$2y$10$ruF8lfLxt8.O1GAC.M9xrOEkXk8Kx06P4', 'saa.arevalo@gmail.com', 2);
 
 -- --------------------------------------------------------
 

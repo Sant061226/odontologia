@@ -34,6 +34,8 @@ if (isset($_GET["accion"])) {
         $controlador->verPagina('Vista/html/tratamientos.php');
     } elseif ($_GET["accion"] == "inicio") {
         $controlador->verPagina('Vista/html/inicio.php');
+    } elseif ($_GET["accion"] == "pacientes") {
+        $controlador->listarPacientes();
     } elseif ($_GET["accion"] == "guardarCita") {
         $controlador->agregarCita(
             $_POST["asignarDocumento"],
@@ -53,8 +55,14 @@ if (isset($_GET["accion"])) {
         );
     } elseif ($_GET["accion"] == "consultarCita") {
         $controlador->consultarCitas($_GET["consultarDocumento"]);
+    } elseif ($_GET["accion"] == "consultarCitaMedico") {
+        $controlador->consultarCitasMedico($_SESSION['usuario_id']);
+    } elseif ($_GET["accion"] == "consultarCitaPaciente") {
+        $controlador->consultarCitasPaciente($_SESSION['usuario_id']);
     } elseif ($_GET["accion"] == "cancelarCita") {
         $controlador->cancelarCitas($_GET["cancelarDocumento"]);
+    } elseif ($_GET["accion"] == "cancelarCitaPaciente") {
+        $controlador->cancelarCitasPacientes($_SESSION['usuario_id']);
     } elseif ($_GET["accion"] == "cancelarTratamiento") {
         $controlador->cancelarTratamiento($_GET["cancelarDocumento"]);
     } elseif ($_GET["accion"] == "ConsultarPaciente") {
@@ -78,6 +86,8 @@ if (isset($_GET["accion"])) {
         $controlador->confirmarCancelarTratamiento($_GET["numero"]);
     } elseif ($_GET["accion"] == "ConsultarTratamientos") {
         $controlador->consultarTratamiento($_GET["documento"]);
+    } elseif ($_GET["accion"] == "ConsultarTratamientosPaciente") {
+        $controlador->consultarTratamiento($_SESSION['usuario_id']);
     } elseif ($_GET["accion"] == "EditarTratamientos") {
         $controlador->editarTratamiento(
             $_POST["TraNumero"],
@@ -99,6 +109,44 @@ if (isset($_GET["accion"])) {
         $controlador->actualizarConsultorio($_GET["numero"], $_GET["nombre"]);
     } elseif ($_GET["accion"] == "agregarConsultorio") {
         $controlador->agregarConsultorio($_GET["numero"], $_GET["nombre"]);
+    } elseif ($_GET['accion'] == 'medicos') {
+        $controlador->listarMedicos();
+    } elseif ($_GET['accion'] == 'agregarMedico' && $_SERVER['REQUEST_METHOD'] == 'POST') {
+        $controlador->agregarMedico(
+            $_POST["MedIdentificacion"],
+            $_POST["MedNombres"],
+            $_POST["MedApellidos"],
+            $_POST["MedContrasena"]
+        );
+        header('Location: index.php?accion=medicos');
+        exit;
+    } elseif ($_GET['accion'] == 'eliminarMedico' && isset($_GET['id'])) {
+        $controlador->eliminarMedico($_GET["id"]);
+        header('Location: index.php?accion=medicos');
+        exit;
+    } elseif ($_GET['accion'] == 'editarMedico' && isset($_GET['id'])) {
+        $controlador->editarMedico($_GET["id"]);
+        header('Location: index.php?accion=medicos');
+        exit;
+    } elseif ($_GET['accion'] == 'actualizarMedico' && $_SERVER['REQUEST_METHOD'] == 'POST') {
+        $controlador->actualizarMedico(
+            $_POST["MedIdentificacion"],
+            $_POST["MedNombres"],
+            $_POST["MedApellidos"],
+            $_POST["MedContrasena"]
+        );
+    } elseif ($_GET["accion"] == "actualizarPaciente") {
+        $controlador->actualizarPaciente(
+            $_POST["PacDocumento"],
+            $_POST["PacNombres"],
+            $_POST["PacApellidos"],
+            $_POST["PacFechaNacimiento"],
+            $_POST["PacSexo"]
+        );
+        exit;
+    } elseif ($_GET["accion"] == "eliminarPaciente" && isset($_GET["id"])) {
+        $controlador->eliminarPaciente($_GET["id"]);
+        exit;
     }
 } else {
     $controlador->verPagina('Vista/html/login.php');

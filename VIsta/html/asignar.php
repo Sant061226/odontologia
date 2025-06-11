@@ -23,8 +23,6 @@
             <?php if ($_SESSION['rol'] == 1): ?>
                 <li class="activa"><a href="index.php?accion=asignar">Asignar Cita</a> </li>
                 <li><a href="index.php?accion=consultar">Consultar Cita</a></li>
-                <li><a href="index.php?accion=cancelar">Cancelar Cita</a></li>
-                <li><a href="index.php?accion=consultorio">Consultorios</a></li>
                 <li><a href="index.php?accion=tratamientos">Tratamientos</a></li>
             <?php elseif ($_SESSION['rol'] == 2): ?>
                 <li><a href="index.php?accion=consultar">Consultar Cita</a></li>
@@ -36,19 +34,19 @@
                 <li><a href="index.php?accion=cancelar">Cancelar Cita</a> </li>
                 <li><a href="index.php?accion=tratamientos">Tratamientos</a> </li>
                 <li><a href="index.php?accion=consultorio">Consultorios</a> </li>
+                <li><a href="index.php?accion=pacientes">Pacientes</a> </li>
                 <li><a href="index.php?accion=medicos">Medicos</a> </li>
             <?php endif; ?>
             <li><a href="index.php?accion=logout">Cerrar sesión</a></li>
         </ul>
         <div id="contenido">
             <h2>Asignar cita</h2>
-            <p>Contenido de la página</p>
             <form id="frmasignar" action="index.php?accion=guardarCita" method="post">
                 <table>
                     <tr>
                         <td>Documento del paciente</td>
-                        <td><input type="text" name="asignarDocumento" id="asignarDocumento" required></
-                                td>
+                        <td><input type="text" name="asignarDocumento" id="asignarDocumento" required>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2"><input type="button" value="Consultar" name="asignarConsultar"
@@ -64,7 +62,7 @@
                         <td>Médico</td>
                         <td>
                             <select id="medico" name="medico" onchange="cargarHoras()">
-                                <option value="-1" selected="selected">---Selecione el
+                                <option value="-1" selected="selected">---Seleccione el
                                     Médico</option>
                                 <?php
 
@@ -91,7 +89,7 @@
                         <td>
                             <select id="consultorio" name="consultorio"
                                 onchange="cargarHoras()" required>
-                                <option value="-1" selected="selected">---Selecione el
+                                <option value="-1" selected="selected">---Seleccione el
                                     Consultorio</option>
                                 <?php
 
@@ -111,8 +109,8 @@
                         <td>Hora</td>
                         <td>
                             <select id="hora" name="hora" onmousedown="seleccionarHora()">
-                                <option value="-1" selected="selected">---Seleccione
-                                    la hora ---</option>
+                                <option value="-1" selected="selected">--Seleccione
+                                    la hora</option>
 
                             </select>
                         </td>
@@ -167,7 +165,7 @@
 
                                 <select id="pacSexo" name="PacSexo">
                                     <option value="-1"
-                                        selected="selected">--Selecione el sexo ---</option>
+                                        selected="selected">--Seleccione el sexo ---</option>
                                     <option value="M">Masculino</option>
                                     <option value="F">Femenino</option>
 

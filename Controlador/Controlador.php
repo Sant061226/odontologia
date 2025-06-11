@@ -58,7 +58,7 @@ class Controlador
         require_once 'Vista/html/confirmarCita.php';
     }
     public function agregarTratamiento($ide, $fec, $des, $fIn, $fFin, $obs)
-   {
+    {
         $tratamiento = new Tratamientos(
             null,
             $ide,
@@ -75,13 +75,37 @@ class Controlador
         $resultado = $gestorTratamiento->consultarTratamientosPorId($id);
         require_once 'Vista/html/consultarTratamientos.php';
     }
+    public function listarPacientes()
+    {
+        $gestorCita = new GestorCita();
+        $result = $gestorCita->consultarPacientes();
+        require 'Vista/html/pacientes.php';
+    }
     public function consultarCitas($doc)
     {
         $gestorCita = new GestorCita();
         $result = $gestorCita->consultarCitasPorDocumento($doc);
         require_once 'Vista/html/consultarCitas.php';
     }
+    public function consultarCitasMedico($doc)
+    {
+        $gestorCita = new GestorCita();
+        $result = $gestorCita->consultarCitasPorMedico($doc);
+        require_once 'Vista/html/consultarCitas.php';
+    }
+    public function consultarCitasPaciente($doc)
+    {
+        $gestorCita = new GestorCita();
+        $result = $gestorCita->consultarCitasPorPaciente($doc);
+        require_once 'Vista/html/consultarCitas.php';
+    }
     public function cancelarCitas($doc)
+    {
+        $gestorCita = new GestorCita();
+        $result = $gestorCita->consultarCitasPorDocumento($doc);
+        require_once 'Vista/html/cancelarCitas.php';
+    }
+    public function cancelarCitasPacientes($doc)
     {
         $gestorCita = new GestorCita();
         $result = $gestorCita->consultarCitasPorDocumento($doc);
@@ -100,6 +124,13 @@ class Controlador
         require_once 'Vista/html/consultarPaciente.php';
     }
     public function consultarTratamiento($doc)
+    {
+        $tratamiento = new GestorTratamientos();
+        $result = $tratamiento->consultarTratamiento($doc);
+        $resultado = $tratamiento->consultarTratamientosPorDocumento($doc);
+        require_once 'Vista/html/consultarTratamientos.php';
+    }
+    public function consultarTratamientoPaciente($doc)
     {
         $tratamiento = new GestorTratamientos();
         $result = $tratamiento->consultarTratamiento($doc);
@@ -225,5 +256,54 @@ class Controlador
         }
         $result = $gestorCita->consultarConsultorios();
         require 'Vista/html/consultorio.php';
+    }
+    public function listarMedicos()
+    {
+        $gestorCita = new GestorCita();
+        $result = $gestorCita->consultarMedicos();
+        require 'Vista/html/medicos.php';
+    }
+    public function agregarMedico($doc, $nom, $ape, $contr)
+    {
+        $gestorCita = new GestorCita();
+        $gestorCita->insertarMedico($doc, $nom, $ape, $contr);
+    }
+    public function editarMedico($id)
+    {
+        $gestorCita = new GestorCita();
+        $result = $gestorCita->consultarMedicoPorId($id);
+        require 'Vista/html/editarMedico.php';
+    }
+    public function actualizarMedico($doc, $nom, $ape, $contr)
+    {
+        $gestorCita = new GestorCita();
+        $gestorCita->actualizarMedico($doc, $nom, $ape, $contr);
+        header('Location: index.php?accion=medicos');
+        exit;
+    }
+    public function eliminarMedico($id)
+    {
+        $gestorCita = new GestorCita();
+        $gestorCita->eliminarMedico($id);
+    }
+    public function consultarMedicos()
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "SELECT * FROM medicos";
+        $conexion->consulta($sql);
+        $result = $conexion->obtenerResult();
+        $conexion->cerrar();
+        return $result;
+    }
+    public function actualizarPaciente($doc, $nom, $ape, $fec, $sex)
+    {
+        $gestorCita = new GestorCita();
+        $gestorCita->actualizarPaciente($doc, $nom, $ape, $fec, $sex);
+    }
+    public function eliminarPaciente($id)
+    {
+        $gestorCita = new GestorCita();
+        $gestorCita->eliminarPaciente($id);
     }
 }

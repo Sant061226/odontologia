@@ -1,62 +1,137 @@
 body {
-    background-color: #dfdfdf;
+  background-color: #dfdfdf;
 }
 #contenedor {
-    font-size:1em;
-    background-color: #ffffff;
-    border:#d3d3d3 1px solid;
-    text-align: justify;
-    margin: 10px auto;
-    width : 900px ;
+  font-size: 1em;
+  font-family: verdana;
+  background-color: #ffffff;
+  border: black 1px solid;
+  text-align: justify;
+  margin: 10px auto;
+  width: 900px;
 }
 #encabezado {
-    width: 900px;
-    height: 150px;
-    background : url('../image/banner.png') no-repeat ;
-    border:
-     #d3d3d3 1px solid ;
+  width: 898px;
+  height: 155px;
+  background: url("../image/banner.png") no-repeat;
+  border: #d3d3d3 1px solid;
 }
 #encabezado h1 {
-    text-align: center ;
-    margin-top: 50px;
+  text-align: center;
+  margin-top: 50px;
 }
 #contenido {
-    border: #d3d3d3 1px solid ;
-    margin: 20px 20px 10px;
-    padding: 10px 15px;
+  border: #d3d3d3 1px solid;
+  margin: 20px 20px 10px;
+  padding: 10px 15px;
 }
 #contenido h2 {
-    color : #0075ff;
-    border-bottom: #CFBFB5 1px solid;
+  color: #0075ff;
+  border-bottom: black 1px solid;
 }
 #menu {
-    float: left;
-    width: 120px;
+  float: left;
+  width: 120px;
+  margin-left: -30px;
 }
 div#contenido {
-    border: #d3d3d3 1px solid ;
-    margin: 20px 20px 10px 180px;
-    padding: 10px 15px;
+  border: black 1px solid;
+  margin: 20px 20px 10px 180px;
+  padding: 10px 15px;
+  min-height: 300px;
 }
 #menu li {
-    border: #d3d3d3 3px solid;
-    background-color: #0075ff;
-    margin-bottom: 5px;
-    font-size: 0.9em;
-    text-align: center;
-    line-height: 30px;
+  border: black 1px solid;
+  background-color: #0597fd;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+  text-align: center;
+  line-height: 30px;
+  width: 150px;
+  list-style: none;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 #menu li:hover {
-    background-color: #7092be;
+  background-color: #7092be;
 }
-#menu li:activa,#menu li:hover {
-    background-color: #7092be;
+#menu li:activa,
+#menu li:hover {
+  background-color: #7092be;
 }
 #menu a {
-    display: block;
-    text-decoration: none;
-    color : #000000;
+  display: block;
+  text-decoration: none;
+  color: #000000;
 }
 #formulario {
-    text-align: center;
+  text-align: center;
+}
+input {
+  width: 200px;
+  height: 30px;
+  margin: 5px;
+  border: black 1px solid;
+  padding-left: 5px;
+}
+[type="button"] {
+  width: 120px;
+  height: 30px;
+  margin: 5px, 5px, 5px, 5px;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border: black 1px solid;
+  background-color: #0597fd;
+  cursor: pointer;
+}
+[type="button"]:hover {
+  background-color: #7092be;
+}
+[type="submit"] {
+  width: 120px;
+  height: 30px;
+  margin: 5px, 5px, 5px, 5px;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border: black 1px solid;
+  background-color: #0597fd;
+  cursor: pointer;
+}
+[type="submit"]:hover {
+  background-color: #7092be;
+}
+select {
+  width: 210px;
+  height: 30px;
+  margin: 5px;
+  border: black 1px solid;
+  padding-left: 5px;
+  font-family: verdana;
+  cursor: pointer;
+}
+button {
+  width: 120px;
+  height: 30px;
+  margin: 5px, 5px, 5px, 5px;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border: black 1px solid;
+  background-color: #0597fd;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #7092be;
+}
+table {
+  width: 100%;
+  margin: 10px 0;
+  border-collapse: collapse;
+  font-size: 0.9em;
+
 }

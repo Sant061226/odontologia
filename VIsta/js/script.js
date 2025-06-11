@@ -1,9 +1,14 @@
-<<<<<<< HEAD
 function insertarPaciente() {
   queryString = $("#agregarPaciente").serialize();
   url = "index.php?accion=ingresarPaciente&" + queryString;
   $("#paciente").load(url);
   $("#frmPaciente").dialog("close");
+}
+function insertarPaciente1() {
+  queryString = $("#agregarPaciente1").serialize();
+  url = "index.php?accion=ingresarPaciente&" + queryString;
+  $("#paciente").load(url);
+  $("#frmPaciente1").dialog("close");
 }
 function insertarTratamiento() {
   queryString = $("#agregarTratamiento").serialize();
@@ -14,8 +19,6 @@ function insertarTratamiento() {
 function cancelar() {
   $(this).dialog("close");
 }
-=======
->>>>>>> 59a7e28f4b14df79f4e2db1045852ab374da4948
 $(document).ready(function () {
   $("#frmPaciente").dialog({
     autoOpen: false,
@@ -29,6 +32,18 @@ $(document).ready(function () {
   });
 });
 $(document).ready(function () {
+  $("#frmPaciente1").dialog({
+    autoOpen: false,
+    height: 310,
+    width: 400,
+    modal: true,
+    buttons: {
+      Insertar: insertarPaciente1,
+      Cancelar: cancelar,
+    },
+  });
+});
+$(document).ready(function () {
   $("#frmTratamiento").dialog({
     autoOpen: false,
     height: 350,
@@ -36,6 +51,30 @@ $(document).ready(function () {
     modal: true,
     buttons: {
       Insertar: insertarTratamiento,
+      Cancelar: cancelar,
+    },
+  });
+});
+$(document).ready(function () {
+  $("#frminsertarMedico").dialog({
+    autoOpen: false,
+    height: 310,
+    width: 400,
+    modal: true,
+    buttons: {
+      Insertar: insertarMedico,
+      Cancelar: cancelar,
+    },
+  });
+});
+$(document).ready(function () {
+  $("#frmEditarMedico").dialog({
+    autoOpen: false,
+    height: 310,
+    width: 400,
+    modal: true,
+    buttons: {
+      Insertar: editarMedico,
       Cancelar: cancelar,
     },
   });
@@ -58,15 +97,36 @@ function consultarTratamiento() {
     $("#asignarDocumento").val();
   $("#paciente").load(url);
 }
+function consultarTratamientoPaciente() {
+  var url =
+    "index.php?accion=ConsultarTratamientosPaciente&documento=" +
+    $("#asignarDocumento").val();
+  $("#paciente").load(url);
+}
 function mostrarFormulario() {
   documento = "" + $("#asignarDocumento").val();
   $("#PacDocumento").attr("value", documento);
   $("#frmPaciente").dialog("open");
 }
+function mostrarFormulario1() {
+  $("#frmPaciente1").dialog("open");
+}
 function mostrarFormularioTrat() {
   var documento = $("#asignarDocumento").val();
   $("#PacDocumento").val(documento);
   $("#frmTratamiento").dialog("open");
+}
+function mostrarFormularioMed() {
+  $("#frminsertarMedico").dialog("open");
+}
+function insertarMedico() {
+  var queryString = $("#insertarMedico").serialize();
+  $.post("index.php?accion=agregarMedico", queryString, function () {
+    $("#frminsertarMedico").dialog("close");
+    alert(queryString);
+
+    window.location.href = "index.php?accion=medicos";
+  });
 }
 function insertarPaciente() {
   queryString = $("#agregarPaciente").serialize();
@@ -75,25 +135,42 @@ function insertarPaciente() {
   alert(queryString);
   $("#frmPaciente").dialog("close");
 }
+function insertarPaciente1() {
+  queryString = $("#agregarPaciente1").serialize();
+  url = "index.php?accion=ingresarPaciente&" + queryString;
+  $("#paciente").load(url);
+  alert(queryString);
+  $("#frmPaciente1").dialog("close");
+}
 function insertarTratamiento() {
   queryString = $("#agregarTratamiento").serialize();
-<<<<<<< HEAD
   url = "index.php?accion=guardarTratamiento" + queryString;
   $("#paciente").load(url);
-=======
   url ="index.php?accion=guardarTratamiento&" + queryString;
   $("#paciente").load(url);
   alert(queryString);
->>>>>>> 59a7e28f4b14df79f4e2db1045852ab374da4948
   $("#frmTratamiento").dialog("close");
 }
 function cancelar() {
   $(this).dialog("close");
 }
+function mostrarModal(id, nombre, apellido) {
+  $("#frmEditarMedico").dialog("open");
+  document.getElementById("editMedIdentificacion").value = id;
+  document.getElementById("editMedNombres").value = nombre;
+  document.getElementById("editMedApellidos").value = apellido;
+}
+function editarMedico() {
+  var queryString = $("#EditarMedico").serialize();
+  $.post("index.php?accion=actualizarMedico", queryString, function () {
+    $("#frmEditarMedico").dialog("close");
+    window.location.href = "index.php?accion=medicos";
+  });
+}
 function cargarHoras() {
   if ($("#medico").val() == -1 || $("#fecha").val() == "") {
     $("#hora").html(
-      "<option value='-1' selected='selected'>--Selecione la hora </option>"
+      "<option value='-1' selected='selected'>--Seleccione la hora </option>"
     );
   } else {
     queryString =
@@ -128,6 +205,16 @@ function consultarCita() {
     $("#consultarDocumento").val();
   $("#paciente2").load(url);
 }
+function consultarCitaMedico() {
+  $.get("index.php?accion=consultarCitaMedico", function (data) {
+    $("#paciente2").html(data);
+  });
+}
+function consultarCitaPaciente() {
+  $.get("index.php?accion=consultarCitaPaciente", function (data) {
+    $("#paciente2").html(data);
+  });
+}
 function consultarTratamientodisponible() {
   url =
     "index.php?accion=ConsultarTratamientos&consultarDocumento=" +
@@ -140,6 +227,22 @@ function cancelarCita() {
     $("#cancelarDocumento").val();
   $("#paciente3").load(url);
 }
+function cancelarCitaPaciente() {
+  $.get(
+    "index.php?accion=cancelarCitaPaciente&cancelarDocumento",
+    function (data) {
+      $("#paciente3").html(data);
+    }
+  );
+}
+function cancelarCitaMedico() {
+  $.get(
+    "index.php?accion=cancelarCitaPaciente&cancelarDocumento",
+    function (data) {
+      $("#paciente3").html(data);
+    }
+  );
+}
 function confirmarCancelar(numero) {
   if (confirm("Esta seguro de cancelar la cita " + numero)) {
     $.get(
@@ -148,32 +251,6 @@ function confirmarCancelar(numero) {
       function (mensaje) {
         alert(mensaje);
         cancelarCita();
-      }
-    );
-  }
-  $("#cancelarConsultar").trigger("click");
-}
-function confirmarCancelarTrat(numero) {
-  if (confirm("Esta seguro de cancelar el tratamiento " + numero)) {
-    $.get(
-      "index.php",
-      { accion: "confirmarCancelarTrat", numero: numero },
-      function (mensaje) {
-        alert(mensaje);
-        var docPaciente = $("table")
-          .first()
-          .find("tr")
-          .eq(1)
-          .find("td")
-          .first()
-          .text()
-          .trim();
-        if (!docPaciente) {
-          docPaciente = $("#asignarDocumento").val();
-        }
-        $("#paciente").load(
-          "index.php?accion=ConsultarTratamientos&documento=" + docPaciente
-        );
       }
     );
   }
@@ -276,3 +353,39 @@ document.getElementById("btnCancelarAgregar").onclick = function () {
   document.getElementById("btnAgregarConsultorio").style.display =
     "inline-block";
 };
+$(document).ready(function () {
+  $("#frmEditarPaciente").dialog({
+    autoOpen: false,
+    height: 350,
+    width: 400,
+    modal: true,
+    buttons: {
+      Guardar: function () {
+        editarPaciente();
+      },
+      Cancelar: cancelar,
+    },
+  });
+});
+function mostrarModalEditarPaciente(id, nombres, apellidos, fechaNacimiento, sexo) {
+  $("#editPacDocumento").val(id);
+  $("#editPacNombres").val(nombres);
+  $("#editPacApellidos").val(apellidos);
+  $("#editPacFechaNacimiento").val(fechaNacimiento);
+  $("#editPacSexo").val(sexo);
+  $("#frmEditarPaciente").dialog("open");
+}
+function editarPaciente() {
+  var queryString = $("#editarPaciente").serialize();
+  $.post("index.php?accion=actualizarPaciente", queryString, function () {
+    location.reload();
+  });
+  $("#frmEditarPaciente").dialog("close");
+}
+function eliminarPaciente(id) {
+    if (confirm("¿Está seguro que desea eliminar este paciente?")) {
+        $.get("index.php?accion=eliminarPaciente&id=" + encodeURIComponent(id), function () {
+            location.reload();
+        });
+    }
+}

@@ -16,8 +16,6 @@
             <?php if ($_SESSION['rol'] == 1): ?>
                 <li class="activa"><a href="index.php?accion=asignar">Asignar Cita</a> </li>
                 <li><a href="index.php?accion=consultar">Consultar Cita</a></li>
-                <li><a href="index.php?accion=cancelar">Cancelar Cita</a></li>
-                <li><a href="index.php?accion=consultorio">Consultorios</a></li>
                 <li><a href="index.php?accion=tratamientos">Tratamientos</a></li>
             <?php elseif ($_SESSION['rol'] == 2): ?>
                 <li><a href="index.php?accion=consultar">Consultar Cita</a></li>
@@ -29,6 +27,7 @@
                 <li><a href="index.php?accion=cancelar">Cancelar Cita</a> </li>
                 <li><a href="index.php?accion=tratamientos">Tratamientos</a> </li>
                 <li><a href="index.php?accion=consultorio">Consultorios</a> </li>
+                <li><a href="index.php?accion=pacientes">Pacientes</a> </li>
                 <li><a href="index.php?accion=medicos">Medicos</a> </li>
             <?php endif; ?>
             <li><a href="index.php?accion=logout">Cerrar sesión</a></li>
