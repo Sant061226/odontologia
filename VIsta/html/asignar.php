@@ -175,6 +175,10 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>Correo</td>
+                            <td><input type="mail" name="PacCorreo" id="PacCorreo" required></td>
+                        </tr>
+                        <tr>
 
                             <td>Crear contraseña</td>
 

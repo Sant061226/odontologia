@@ -96,7 +96,7 @@
             <form action="index.php?accion=enviarCorreoCita" method="post" style="margin-top:20px;">
                 <input type="hidden" name="CitNumero" value="<?php echo $fila->CitNumero; ?>">
                 <label for="correo_destino">Correo destino:</label>
-                <input type="email" name="correo_destino" id="correo_destino" required>
+                <input type="email" name="correo_destino" id="correo_destino" value="<?php echo $fila->PacCorreo; ?>">
                 <button type="submit">Enviar Correo</button>
             </form>
         </div>

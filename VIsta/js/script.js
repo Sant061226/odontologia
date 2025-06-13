@@ -6,7 +6,7 @@ function insertarPaciente() {
 }
 function insertarPaciente1() {
   queryString = $("#agregarPaciente1").serialize();
-  url = "index.php?accion=ingresarPaciente&" + queryString;
+  url = "index.php?accion=ingresarPaciente1&" + queryString;
   $("#paciente").load(url);
   $("#frmPaciente1").dialog("close");
 }
@@ -40,6 +40,22 @@ $(document).ready(function () {
     buttons: {
       Insertar: insertarPaciente1,
       Cancelar: cancelar,
+    },
+  });
+});
+$(document).ready(function () {
+  $("#frmPaciente2").dialog({
+    autoOpen: false,
+    height: 310,
+    width: 400,
+    modal: true,
+    buttons: {
+      Guardar: function () {
+        editarPaciente();
+      },
+      Cancelar: function () {
+        $(this).dialog("close");
+      },
     },
   });
 });
@@ -137,7 +153,7 @@ function insertarPaciente() {
 }
 function insertarPaciente1() {
   queryString = $("#agregarPaciente1").serialize();
-  url = "index.php?accion=ingresarPaciente&" + queryString;
+  url = "index.php?accion=ingresarPaciente1&" + queryString;
   $("#paciente").load(url);
   alert(queryString);
   $("#frmPaciente1").dialog("close");
@@ -353,36 +369,28 @@ document.getElementById("btnCancelarAgregar").onclick = function () {
   document.getElementById("btnAgregarConsultorio").style.display =
     "inline-block";
 };
-$(document).ready(function () {
-  $("#frmEdPaciente").dialog({
-    autoOpen: false,
-    height: 350,
-    width: 400,
-    modal: true,
-    buttons: {
-      Guardar: function () {
-        editarPaciente();
-      },
-      Cancelar: function () {
-        $(this).dialog("close");
-      },
-    },
-  });
-});
 
-function mostrarModalPac(id, nombres, apellidos, fechaNacimiento, sexo) {
+function mostrarModalPac(
+  id,
+  nombres,
+  apellidos,
+  fechaNacimiento,
+  sexo,
+  correo
+) {
   $("#editPacDocumento").val(id);
   $("#editPacNombres").val(nombres);
   $("#editPacApellidos").val(apellidos);
   $("#editPacFechaNacimiento").val(fechaNacimiento);
   $("#editPacSexo").val(sexo);
-  $("#frmEdPaciente").dialog("open");
+  $("#editPacCorreo").val(correo);
+  $("#frmPaciente2").dialog("open");
 }
 
 function editarPaciente() {
   var datos = $("#editarPaciente").serialize();
   $.post("index.php?accion=actualizarPaciente", datos, function (respuesta) {
-    $("#frmEdPaciente").dialog("close");
+    $("#frmPaciente2").dialog("close");
     location.reload();
   });
 }

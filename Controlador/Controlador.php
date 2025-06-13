@@ -161,11 +161,22 @@ class Controlador
         $resultado = $tratamiento->consultarTratamientosPorDocumento($doc);
         require_once 'Vista/html/consultarTratamientos.php';
     }
-    public function agregarPaciente($doc, $nom, $ape, $fec, $sex, $contr)
+    public function agregarPaciente($doc, $nom, $ape, $fec, $sex, $corr, $contr)
     {
-        $paciente = new Paciente($doc, $nom, $ape, $fec, $sex, $contr);
+        $paciente = new Paciente($doc, $nom, $ape, $fec, $sex, $corr, $contr);
         $gestorCita = new GestorCita();
         $registros = $gestorCita->agregarPaciente($paciente);
+        if ($registros > 0) {
+            echo "Se insertó el paciente con exito";
+        } else {
+            echo "Error al guardar el paciente";
+        }
+    }
+    public function agregarPacientes($doc, $nom, $ape, $fec, $sex, $corr, $contr)
+    {
+        $paciente1 = new Paciente($doc, $nom, $ape, $fec, $sex, $corr, $contr);
+        $gestorCita = new GestorCita();
+        $registros = $gestorCita->agregarPaciente1($paciente1);
         if ($registros > 0) {
             echo "Se insertó el paciente con exito";
         } else {

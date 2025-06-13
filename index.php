@@ -77,7 +77,18 @@ if (isset($_GET["accion"])) {
             $_GET["PacApellidos"],
             $_GET["PacNacimiento"],
             $_GET["PacSexo"],
+            $_GET["PacCorreo"],
             $_GET["PacContraseña"],
+        );
+    } elseif ($_GET["accion"] == "ingresarPaciente1") {
+        $controlador->agregarPacientes(
+            $_GET["PacDocumento1"],
+            $_GET["PacNombres1"],
+            $_GET["PacApellidos1"],
+            $_GET["PacNacimiento1"],
+            $_GET["PacSexo1"],
+            $_GET["PacCorreo1"],
+            $_GET["PacContraseña1"],
         );
     } elseif ($_GET["accion"] == "consultarHora") {
         $controlador->consultarHorasDisponibles($_GET["medico"], $_GET["fecha"]);
@@ -144,6 +155,7 @@ if (isset($_GET["accion"])) {
             $_POST["PacNombres"],
             $_POST["PacApellidos"],
             $_POST["PacFechaNacimiento"],
+            $_POST["PacCorreo"],
             $_POST["PacSexo"]
         );
         exit;

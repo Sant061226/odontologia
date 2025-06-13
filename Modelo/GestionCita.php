@@ -65,10 +65,30 @@ as consultorios ,citas "
         $apellidos = $paciente->obtenerApellidos();
         $fechaNacimiento = $paciente->obtenerFechaNacimiento();
         $sexo = $paciente->obtenerSexo();
+        $correo = $paciente->obtenerCorreo();
         $contrasena = $paciente->obtenerContrasena();
         $hash = password_hash($contrasena, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO Pacientes (PacIdentificacion, PacNombres, PacApellidos, PacFechaNacimiento, PacSexo, PacContrasena)
-                VALUES ('$identificacion','$nombres','$apellidos','$fechaNacimiento','$sexo','$hash')";
+        $sql = "INSERT INTO Pacientes (PacIdentificacion, PacNombres, PacApellidos, PacFechaNacimiento, PacSexo, PacCorreo, PacContrasena)
+                VALUES ('$identificacion','$nombres','$apellidos','$fechaNacimiento','$sexo', '$correo','$hash')";
+        $conexion->consulta($sql);
+        $filasAfectadas = $conexion->obtenerFilasAfectadas();
+        $conexion->cerrar();
+        return $filasAfectadas;
+    }
+     public function agregarPaciente1(Paciente $paciente1)
+    {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $identificacion = $paciente1->obtenerIdentificacion();
+        $nombres = $paciente1->obtenerNombres();
+        $apellidos = $paciente1->obtenerApellidos();
+        $fechaNacimiento = $paciente1->obtenerFechaNacimiento();
+        $sexo = $paciente1->obtenerSexo();
+        $correo = $paciente1->obtenerCorreo();
+        $contrasena = $paciente1->obtenerContrasena();
+        $hash = password_hash($contrasena, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO Pacientes (PacIdentificacion1, PacNombres1, PacApellidos1, PacFechaNacimiento1, PacSexo1, PacCorreo1, PacContrasena1)
+                VALUES ('$identificacion','$nombres','$apellidos','$fechaNacimiento','$sexo', '$correo','$hash')";
         $conexion->consulta($sql);
         $filasAfectadas = $conexion->obtenerFilasAfectadas();
         $conexion->cerrar();
