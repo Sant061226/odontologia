@@ -38,7 +38,7 @@ $(document).ready(function () {
     width: 400,
     modal: true,
     buttons: {
-      Insertar: insertarPaciente1,
+      Insertar: insertarPaciente,
       Cancelar: cancelar,
     },
   });
@@ -50,12 +50,8 @@ $(document).ready(function () {
     width: 400,
     modal: true,
     buttons: {
-      Guardar: function () {
-        editarPaciente();
-      },
-      Cancelar: function () {
-        $(this).dialog("close");
-      },
+      Insertar: editarPaciente,
+      Cancelar: cancelar,
     },
   });
 });
@@ -150,13 +146,6 @@ function insertarPaciente() {
   $("#paciente").load(url);
   alert(queryString);
   $("#frmPaciente").dialog("close");
-}
-function insertarPaciente1() {
-  queryString = $("#agregarPaciente1").serialize();
-  url = "index.php?accion=ingresarPaciente1&" + queryString;
-  $("#paciente").load(url);
-  alert(queryString);
-  $("#frmPaciente1").dialog("close");
 }
 function insertarTratamiento() {
   queryString = $("#agregarTratamiento").serialize();
@@ -386,12 +375,12 @@ function mostrarModalPac(
   $("#editPacCorreo").val(correo);
   $("#frmPaciente2").dialog("open");
 }
-
 function editarPaciente() {
-  var datos = $("#editarPaciente").serialize();
-  $.post("index.php?accion=actualizarPaciente", datos, function (respuesta) {
+  var queryString = $("#EditarPaciente").serialize();
+  $.post("index.php?accion=actualizarPaciente", queryString, function () {
     $("#frmPaciente2").dialog("close");
-    location.reload();
+    alert(queryString);
+    window.location.href = "index.php?accion=pacientes";
   });
 }
 function eliminarPaciente(id) {

@@ -172,17 +172,6 @@ class Controlador
             echo "Error al guardar el paciente";
         }
     }
-    public function agregarPacientes($doc, $nom, $ape, $fec, $sex, $corr, $contr)
-    {
-        $paciente1 = new Paciente($doc, $nom, $ape, $fec, $sex, $corr, $contr);
-        $gestorCita = new GestorCita();
-        $registros = $gestorCita->agregarPaciente1($paciente1);
-        if ($registros > 0) {
-            echo "Se insertó el paciente con exito";
-        } else {
-            echo "Error al guardar el paciente";
-        }
-    }
     public function cargarAsignar()
     {
         $gestorCita = new GestorCita();
@@ -331,10 +320,12 @@ class Controlador
         $conexion->cerrar();
         return $result;
     }
-    public function actualizarPaciente($doc, $nom, $ape, $fec, $sex)
+    public function actualizarPaciente($doc, $nom, $ape, $fec, $corr, $sex)
     {
         $gestorCita = new GestorCita();
-        $gestorCita->actualizarPaciente($doc, $nom, $ape, $fec, $sex);
+        $gestorCita->actualizarPaciente($doc, $nom, $ape, $fec, $corr, $sex);
+        header('Location: index.php?accion=pacientes');
+        exit;
     }
     public function eliminarPaciente($id)
     {

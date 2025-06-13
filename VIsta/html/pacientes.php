@@ -68,31 +68,31 @@
                     </tr>
                 <?php endwhile; ?>
             </table>
-        <input type="button" name="ingPaciente" id="ingPaciente" value="Ingresar Paciente" onclick="mostrarFormulario1()">
+            <input type="button" name="ingPaciente" id="ingPaciente" value="Ingresar Paciente" onclick="mostrarFormulario1()">
         </div>
         <div id="frmPaciente1" title="Agregar Nuevo Paciente">
-            <form id="agregarPaciente1">
+            <form id="agregarPaciente">
                 <table>
                     <tr>
                         <td>Documento</td>
-                        <td><input type="text" name="PacDocumento1" id="PacDocumento1" required></td>
+                        <td><input type="text" name="PacDocumento" id="PacDocumento" required></td>
                     </tr>
                     <tr>
                         <td>Nombres</td>
-                        <td><input type="text" name="PacNombres1" id="PacNombres1" required></td>
+                        <td><input type="text" name="PacNombres" id="PacNombres" required></td>
                     </tr>
                     <tr>
                         <td>Apellidos</td>
-                        <td><input type="text" name="PacApellidos1" id="PacApellidos1" required></td>
+                        <td><input type="text" name="PacApellidos" id="PacApellidos" required></td>
                     </tr>
                     <tr>
                         <td>Fecha de Nacimiento</td>
-                        <td><input type="date" name="PacNacimiento1" id="PacNacimiento1" required></td>
+                        <td><input type="date" name="PacNacimiento" id="PacNacimiento" required></td>
                     </tr>
                     <tr>
                         <td>Sexo</td>
                         <td>
-                            <select id="PacSexo1" name="PacSexo1" required>
+                            <select id="PacSexo1" name="PacSexo" required>
                                 <option value="">--Seleccione el sexo---</option>
                                 <option value="M">Masculino</option>
                                 <option value="F">Femenino</option>
@@ -101,17 +101,17 @@
                     </tr>
                     <tr>
                         <td>Correo</td>
-                        <td><input type="mail" name="PacCorreo1" id="PacCorreo1" required></td>
+                        <td><input type="mail" name="PacCorreo" id="PacCorreo" required></td>
                     </tr>
                     <tr>
                         <td>Crear contraseña</td>
-                        <td><input type="password" name="PacContrasena1" id="PacContrasena1" required></td>
+                        <td><input type="password" name="PacContrasena" id="PacContrasena" required></td>
                     </tr>
                 </table>
             </form>
         </div>
         <div id="frmPaciente2" title="Editar Paciente">
-            <form id="editarPaciente">
+            <form id="EditarPaciente" method="post">
                 <input type="hidden" name="PacDocumento" id="editPacDocumento">
                 <table>
                     <tr>

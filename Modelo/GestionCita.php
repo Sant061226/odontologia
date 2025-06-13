@@ -75,25 +75,6 @@ as consultorios ,citas "
         $conexion->cerrar();
         return $filasAfectadas;
     }
-     public function agregarPaciente1(Paciente $paciente1)
-    {
-        $conexion = new Conexion();
-        $conexion->abrir();
-        $identificacion = $paciente1->obtenerIdentificacion();
-        $nombres = $paciente1->obtenerNombres();
-        $apellidos = $paciente1->obtenerApellidos();
-        $fechaNacimiento = $paciente1->obtenerFechaNacimiento();
-        $sexo = $paciente1->obtenerSexo();
-        $correo = $paciente1->obtenerCorreo();
-        $contrasena = $paciente1->obtenerContrasena();
-        $hash = password_hash($contrasena, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO Pacientes (PacIdentificacion1, PacNombres1, PacApellidos1, PacFechaNacimiento1, PacSexo1, PacCorreo1, PacContrasena1)
-                VALUES ('$identificacion','$nombres','$apellidos','$fechaNacimiento','$sexo', '$correo','$hash')";
-        $conexion->consulta($sql);
-        $filasAfectadas = $conexion->obtenerFilasAfectadas();
-        $conexion->cerrar();
-        return $filasAfectadas;
-    }
     public function consultarPacientes()
     {
         $conexion = new Conexion();
@@ -267,11 +248,11 @@ CitFecha = '$fecha'"
         $conexion->consulta($sql);
         $conexion->cerrar();
     }
-    public function actualizarPaciente($doc, $nom, $ape, $fec, $sex)
+    public function actualizarPaciente($doc, $nom, $ape, $fec, $corr, $sex)
     {
         $conexion = new Conexion();
         $conexion->abrir();
-        $sql = "UPDATE Pacientes SET PacNombres='$nom', PacApellidos='$ape', PacFechaNacimiento='$fec', PacSexo='$sex' WHERE PacIdentificacion='$doc'";
+        $sql = "UPDATE pacientes SET PacNombres='$nom', PacApellidos='$ape', PacFechaNacimiento='$fec', PacSexo='$sex', PacCorreo='$corr' WHERE PacIdentificacion='$doc'";
         $conexion->consulta($sql);
         $conexion->cerrar();
     }
